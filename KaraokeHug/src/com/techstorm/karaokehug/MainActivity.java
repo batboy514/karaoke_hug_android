@@ -1,34 +1,42 @@
 package com.techstorm.karaokehug;
 
 
+import java.util.ArrayList;
+
 import android.app.TabActivity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 
 public class MainActivity extends TabActivity {
+    
+    private DatabaseHelper mHelper;
+	private ArrayList<String> user_fName = new ArrayList<String>();
+	private ListView userList;
+	private SQLiteDatabase dataBase;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
-        super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        DatabaseCreator.openDatabase(this);
+        DatabaseCreator.getMapPath();
 		setTabs() ;
     }
-
+       
     private void setTabs()
 	{
-		addTab("Search", R.drawable.tab_search, ArrowsActivity.class);
+		addTab("Search", R.drawable.tab_search,SearchActivity.class);
 		addTab("Song", R.drawable.tab_song, OptionsActivity.class);
 		
-		addTab("Favorite", R.drawable.tab_favorite, ArrowsActivity.class);
-		addTab("Help", R.drawable.tab_help, OptionsActivity.class);
+	//	addTab("Favorite", R.drawable.tab_favorite, search.class);
+		//addTab("Help", R.drawable.tab_help, search.class);
 	}
 	
 	private void addTab(String labelId, int drawableId, Class<?> c)
