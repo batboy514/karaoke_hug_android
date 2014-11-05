@@ -3,32 +3,20 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <Button
-        android:id="@+id/btnsearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textsearch"
-        android:layout_alignBottom="@+id/textsearch"
-        android:layout_marginLeft="64dp"
-        android:layout_toRightOf="@+id/textsearch"
-        android:text="Search" />
-
     <ListView
         android:id="@+id/userlistsearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btnsearch" >
+        android:layout_alignParentLeft="true" >
     </ListView>
 
-    <TextView
-        android:id="@+id/textsearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="21dp"
-        android:text="TextView" />
+    
+    
+ 
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+       	<EditText android:id="@+id/textsearch" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="4">
 
-</RelativeLayout>
+	    </EditText>
+	    
+	    <Button android:id="@+id/btnsearch" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:layout_alignParentTop="true" android:layout_marginRight="58dp" android:text="Search" android:layout_weight="1" />
+    </LinearLayout></RelativeLayout>

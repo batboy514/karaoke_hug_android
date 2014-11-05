@@ -59,8 +59,8 @@ public class DisplayAdapter extends BaseAdapter {
 			layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			child = layoutInflater.inflate(R.layout.listcell, null);
 			mHolder = new Holder();
-			mHolder.txt_id = (TextView) child.findViewById(R.id.txt_id);
-			mHolder.txt_name = (TextView) child.findViewById(R.id.txt_name);
+			mHolder.txt_id = (TextView) child.findViewById(R.id.Txt_id);
+			mHolder.txt_name = (TextView) child.findViewById(R.id.Txt_name);
 			mHolder.txt_lyric = (TextView) child.findViewById(R.id.txt_lyric);
 			mHolder.txt_author = (TextView) child.findViewById(R.id.txt_author);
 			child.setTag(mHolder);
