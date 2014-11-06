@@ -56,7 +56,7 @@ public class SearchActivity extends Activity implements OnClickListener{
 
 		}
 	});
-        final ListView userlistsearch = (ListView) findViewById(R.id.userlistsearch);
+        final ListView userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
         userlistsearch.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -84,15 +84,19 @@ public class SearchActivity extends Activity implements OnClickListener{
 	
 	
 	private void displayData( ) {
-		ListView userlistsearch = (ListView) findViewById(R.id.userlistsearch);
+		ListView userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
 		dataBase = mHelper.getWritableDatabase();
 		mHelper.openDatabase();
 		String query = "SELECT ZSNAME,ZROWID,ZSLYRIC,ZSMETA FROM ZSONG";
-		query = query + " WHERE ZSNAMECLEAN like '" + c +"'" ;
+		query = query + " WHERE ZSNAMECLEAN like '" + c +"%'" ;
 		String query1 = "SELECT ZSNAME,ZROWID,ZSLYRIC,ZSMETA FROM ZSONG";
 		query1 = query1 + " WHERE ZROWID = '" + b +"'" ;
+		String query10 = "SELECT ZSNAME,ZROWID,ZSLYRIC,ZSMETA FROM ZSONG";
+		query10 = query10 + " WHERE ZSABBR like '" + c +"%'" ;
 		Cursor mCursor = dataBase.rawQuery( query1 , null);
 		Cursor mCursor2 = dataBase.rawQuery( query , null);
+		Cursor mCursor3 = dataBase.rawQuery( query10 , null);
+
 			user_name.clear();
 			user_id.clear();
 			user_lyric.clear();
@@ -119,6 +123,18 @@ public class SearchActivity extends Activity implements OnClickListener{
 					DisplaySearch disadpt2 = new DisplaySearch(SearchActivity.this,user_id, user_name, user_lyric, user_author);
 					userlistsearch.setAdapter(disadpt2);
 					mCursor2.close();
+					if (mCursor3.moveToFirst()) {
+						do {
+							user_id.add(mCursor3.getString(mCursor3.getColumnIndex("ZROWID")));
+							user_name.add(mCursor3.getString(mCursor3.getColumnIndex("ZSNAME")));
+							user_lyric.add(mCursor3.getString(mCursor3.getColumnIndex("ZSLYRIC")));
+							user_author.add(mCursor3.getString(mCursor3.getColumnIndex("ZSMETA")));
+						} while (mCursor3.moveToNext());
+					}
+							DisplaySearch disadpt3 = new DisplaySearch(SearchActivity.this,user_id, user_name, user_lyric, user_author);
+							userlistsearch.setAdapter(disadpt3);
+							mCursor3.close();
+
 
 	}
 

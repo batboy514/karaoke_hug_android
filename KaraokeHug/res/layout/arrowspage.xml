@@ -101,16 +101,6 @@
         android:textColor="#00FFFF"
         android:textColorHint="#00FFFF" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="56dp"
-        android:layout_toRightOf="@+id/linearLayout1"
-        android:text="Quay lại" />
-
     <TextView
         android:id="@+id/textid"
         android:layout_width="wrap_content"
@@ -120,5 +110,24 @@
         android:text="TextView"
         android:textColor="#00FFFF"
         android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Quay lại" />
+
+    <Button
+        android:id="@+id/btnfavorite"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView07"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        android:text="Favorite" />
 
 </RelativeLayout>

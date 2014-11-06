@@ -32,10 +32,11 @@ public class MainActivity extends TabActivity {
        
     private void setTabs()
 	{
-		addTab("Search", R.drawable.tab_search,SearchActivity.class);
+    	addTab("Favorite", R.drawable.tab_favorite, FavouriteActivity.class);
+    	addTab("Search", R.drawable.tab_search,SearchActivity.class);
 		addTab("Song", R.drawable.tab_song, OptionsActivity.class);
 		
-	//	addTab("Favorite", R.drawable.tab_favorite, search.class);
+		
 		//addTab("Help", R.drawable.tab_help, search.class);
 	}
 	
