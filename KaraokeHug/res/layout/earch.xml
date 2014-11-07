@@ -24,7 +24,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="58dp"
             android:layout_weight="1"
-            android:text="Search" />
+            android:background="@drawable/search"
+            android:text="" />
     </LinearLayout>
 
     <ListView
