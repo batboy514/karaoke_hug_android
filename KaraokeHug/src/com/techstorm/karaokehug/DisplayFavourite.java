@@ -21,8 +21,6 @@ public class DisplayFavourite extends BaseAdapter{
 	private ArrayList<String> lyric;
 	private ArrayList<String> author;
 
-	private SQLiteDatabase dataBase;
-	 private DatabaseHelper mHelper;
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -80,12 +78,8 @@ public class DisplayFavourite extends BaseAdapter{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String id = (String)v.getTag();
-				 dataBase = mHelper.getWritableDatabase();
-					mHelper.openDatabase();
-					
 				int value = Integer.parseInt(id);
-				String strSQL = "UPDATE ZSONG SET favourite = 0 WHERE ZROWID = "+ value + ";";
-				dataBase.execSQL(strSQL);
+				DatabaseCreator.delFavourite(value);
 				FavouriteActivity favActivity =  (FavouriteActivity)mContext;
 				favActivity.displayDataALL();
 			}
@@ -100,7 +94,6 @@ public class DisplayFavourite extends BaseAdapter{
 		this.name = name;
 		this.lyric = lyric;
 		this.author = author;
-		mHelper = new DatabaseHelper(c);
 	}
 	
 

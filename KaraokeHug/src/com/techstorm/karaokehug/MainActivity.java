@@ -18,15 +18,10 @@ import android.widget.TextView;
 
 public class MainActivity extends TabActivity {
     
-    private DatabaseHelper mHelper;
-	private ArrayList<String> user_fName = new ArrayList<String>();
-	private ListView userList;
-	private SQLiteDatabase dataBase;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DatabaseCreator.openDatabase(this);
-        DatabaseCreator.getMapPath();
 		setTabs() ;
     }
        

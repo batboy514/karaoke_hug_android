@@ -17,8 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 public class SearchActivity extends Activity implements OnClickListener {
-	private SQLiteDatabase dataBase;
-	private DatabaseHelper mHelper;
+	
 	private int b;
 	private String c;
 	private ArrayList<String> user_name = new ArrayList<String>();
@@ -29,7 +28,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.earch);
-		mHelper = new DatabaseHelper(this);
+		
 		Button btnsearch = (Button) findViewById(R.id.btnsearch);
 		btnsearch.setOnClickListener(new View.OnClickListener() {
 
@@ -72,7 +71,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				intent.putExtra("author", (String) map.get("author"));
 				intent.setClass(getApplicationContext(), ArrowsActivity.class);
 				startActivity(intent);
-
+				
 			}
 		});
 

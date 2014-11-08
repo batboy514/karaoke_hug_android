@@ -13,14 +13,12 @@ import android.widget.TextView;
  *
  */
 public class ArrowsActivity extends Activity implements View.OnClickListener {
-	private SQLiteDatabase dataBase;
-	private DatabaseHelper mHelper;
+	
 	public static final String KEY_ROWID = "id";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.arrowspage);
-		mHelper = new DatabaseHelper(this);
 		Bundle bundle = getIntent().getExtras();
 		String name = bundle.getString("name");
 		String id = bundle.getString("id");
@@ -41,14 +39,8 @@ public class ArrowsActivity extends Activity implements View.OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				dataBase = mHelper.getWritableDatabase();
-				mHelper.openDatabase();
-
 				int value = Integer.parseInt(textid.getText().toString());
-				String strSQL = "UPDATE ZSONG SET favourite = 1 WHERE ZROWID = "
-						+ value + ";";
-				dataBase.execSQL(strSQL);
-
+				DatabaseCreator.addFavourite(value);
 			}
 		});
 		Button btn = (Button) findViewById(R.id.btn);

@@ -15,8 +15,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 
 public class FavouriteActivity extends Activity implements OnItemSelectedListener{
-	 private DatabaseHelper mHelper;
-	 private SQLiteDatabase dataBase;
+
 	 ListView userlistfavourite;
 	 private ArrayList<String> user_name = new ArrayList<String>();
 		private ArrayList<String> user_id = new ArrayList<String>();
@@ -28,9 +27,7 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favourite);
         userlistfavourite = (ListView) findViewById(R.id.userlistfavourite);
-        mHelper = new DatabaseHelper(this);
-        dataBase = mHelper.getWritableDatabase();
-    	mHelper.openDatabase();
+       
     	displayDataALL();
     	userlistfavourite.setClickable(true);
     	userlistfavourite.setOnItemSelectedListener(this);
@@ -41,27 +38,10 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 	
 	
 	public void displayDataALL( ) {
-		dataBase = mHelper.getWritableDatabase();
-		mHelper.openDatabase();
-		String query = "SELECT ZSNAME,ZROWID,ZSLYRIC,ZSMETA FROM ZSONG where favourite = 1";
-//		if (vol != -1) {
-			
-			Cursor mCursor = dataBase.rawQuery( query , null);
-			user_name.clear();
-			user_id.clear();
-			user_lyric.clear();
-			user_author.clear();
-			if (mCursor.moveToFirst()) {
-				do {
-					user_id.add(mCursor.getString(mCursor.getColumnIndex("ZROWID")));
-					user_name.add(mCursor.getString(mCursor.getColumnIndex("ZSNAME")));
-					user_lyric.add(mCursor.getString(mCursor.getColumnIndex("ZSLYRIC")));
-					user_author.add(mCursor.getString(mCursor.getColumnIndex("ZSMETA")));
-				} while (mCursor.moveToNext());
-			}
+		
+			DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
 			DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,user_id, user_name, user_lyric, user_author);
 					userlistfavourite.setAdapter(disadpt2);
-					mCursor.close();
 				
 	}
 	
