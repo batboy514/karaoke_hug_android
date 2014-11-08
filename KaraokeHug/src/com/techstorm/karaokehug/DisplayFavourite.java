@@ -18,7 +18,9 @@ public class DisplayFavourite extends BaseAdapter{
 	private Context mContext;
 	private ArrayList<String> id;
 	private ArrayList<String> name;
-	
+	private ArrayList<String> lyric;
+	private ArrayList<String> author;
+
 	private SQLiteDatabase dataBase;
 	 private DatabaseHelper mHelper;
 	@Override
@@ -33,7 +35,8 @@ public class DisplayFavourite extends BaseAdapter{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("name", name.get(arg0));
 		map.put("id", id.get(arg0));
-		
+		map.put("lyric", lyric.get(arg0));
+		map.put("author", author.get(arg0));
 		return map;
 		
 		
@@ -59,6 +62,8 @@ public class DisplayFavourite extends BaseAdapter{
 			mHolder = new Holder();
 			mHolder.txt_id = (TextView) arg1.findViewById(R.id.Txt_id);
 			mHolder.txt_name = (TextView) arg1.findViewById(R.id.Txt_name);
+//			mHolder.txt_lyric = (TextView) arg1.findViewById(R.id.txt_lyric);
+//			mHolder.txt_author = (TextView) arg1.findViewById(R.id.txt_author);
 			mHolder.btndel = (Button) arg1.findViewById(R.id.btndel);
 			arg1.setTag(mHolder);
 		} else {
@@ -66,6 +71,8 @@ public class DisplayFavourite extends BaseAdapter{
 		}
 		mHolder.txt_name.setText(name.get(arg0));
 		mHolder.txt_id.setText(id.get(arg0));
+//		mHolder.txt_lyric.setText(lyric.get(arg0));
+//		mHolder.txt_author.setText(author.get(arg0));
 		mHolder.btndel.setTag(id.get(arg0));
 		mHolder.btndel.setOnClickListener(new OnClickListener() {
 			
@@ -87,10 +94,12 @@ public class DisplayFavourite extends BaseAdapter{
 	}
 	
 	private Context context;
-	public DisplayFavourite(Context c,ArrayList<String> id,ArrayList<String> name) {
+	public DisplayFavourite(Context c,ArrayList<String> id,ArrayList<String> name,ArrayList<String> lyric,ArrayList<String> author) {
 		this.mContext = c;
 		this.id = id;
 		this.name = name;
+		this.lyric = lyric;
+		this.author = author;
 		mHelper = new DatabaseHelper(c);
 	}
 	
@@ -99,6 +108,7 @@ public class DisplayFavourite extends BaseAdapter{
 		TextView txt_id;
 		TextView txt_name;
 		Button btndel;
-		
+		TextView txt_lyric;
+		TextView txt_author;
 	}
 }

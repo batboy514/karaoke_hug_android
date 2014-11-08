@@ -25,7 +25,7 @@
         <activity android:name="ArrowsActivity"/>		
 		<activity android:name="OptionsActivity" />
 		<activity android:name="SearchActivity" />
-				<activity android:name="FavouriteActivity" />
+				<activity android:name="FavouriteActivity" android:clickable="false" />
 		
     </application>
 
