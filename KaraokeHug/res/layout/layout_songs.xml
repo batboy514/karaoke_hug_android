@@ -23,14 +23,13 @@
             android:layout_weight="1"
             android:gravity="right"
             android:prompt="@string/spinner_title" />
-
     </LinearLayout>
 
-        <ListView
-            android:id="@+id/list1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="40dp">
-        </ListView>
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp" >
+    </ListView>
 
 </RelativeLayout>

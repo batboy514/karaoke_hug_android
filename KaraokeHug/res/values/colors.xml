@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	
-	
-	
+	<color name="appColor">#E27639</color>
+	<color name="textColor">#E27639</color>
+	<color name="textLightColor">#838383</color>
+	<color name="backgroundColor">#FFFFFF</color>
 	<color name="tabMedium">#2B2B2B</color>
 	<color name="tabDark">#000000</color>
 	<color name="tabTransparent">#10ffffff</color>

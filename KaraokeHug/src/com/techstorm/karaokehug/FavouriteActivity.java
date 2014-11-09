@@ -47,7 +47,6 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		displayDataALL();
 	}
@@ -58,7 +57,6 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 			long arg3) {
 		userlistfavourite = (ListView) findViewById(R.id.userlistfavourite);
 		Map<String, Object> map = (Map<String, Object>)userlistfavourite.getItemAtPosition(arg2);
-		// TODO Auto-generated method stub
 		 Intent intent = new Intent();
 		 intent.putExtra("lyric", (String)map.get("lyric"));
 		 intent.putExtra("author", (String)map.get("author"));
@@ -71,7 +69,6 @@ intent.setClass(getApplicationContext(), ArrowsActivity.class);
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -22,9 +22,9 @@ import android.widget.Toast;
  * @author
  * 
  */
-public class OptionsActivity extends Activity implements OnItemSelectedListener {
+public class SongsActivity extends Activity implements OnItemSelectedListener {
 
-	
+	private final String ALL = "All";
 	private ArrayList<String> user_name = new ArrayList<String>();
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
@@ -32,10 +32,10 @@ public class OptionsActivity extends Activity implements OnItemSelectedListener 
 	private List<String> categories = new ArrayList<String>();
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
-	private char b = 'a';
+	private Character abcSearch = null;
 	private Integer c;
 	private ListView userList;
-	
+
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
@@ -50,15 +50,14 @@ public class OptionsActivity extends Activity implements OnItemSelectedListener 
 	}
 
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
-
+		// empty
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.optionspage);
+		setContentView(R.layout.layout_songs);
 		userList = (ListView) findViewById(R.id.list1);
-	
+
 		Spinner spinner = (Spinner) findViewById(R.id.spinner);
 		Spinner spinner1 = (Spinner) findViewById(R.id.Spinner01);
 		// Spinner click listener
@@ -67,14 +66,17 @@ public class OptionsActivity extends Activity implements OnItemSelectedListener 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				// TODO Auto-generated method stub
-				char item1 = arg0.getItemAtPosition(arg2).toString().charAt(0);
-
-				b = arg0.getItemAtPosition(arg2).toString().charAt(0);
+				if (ALL.equals(arg0.getItemAtPosition(arg2).toString())) {
+					abcSearch = null;
+				} else {
+					abcSearch = arg0.getItemAtPosition(arg2).toString()
+							.charAt(0);
+					// Showing selected spinner item
+					Toast.makeText(arg0.getContext(), "Selected: " + abcSearch,
+							Toast.LENGTH_LONG).show();
+				}
 				displayDataALL();
-				// Showing selected spinner item
-				Toast.makeText(arg0.getContext(), "Selected: " + item1,
-						Toast.LENGTH_LONG).show();
+
 			}
 
 			@Override
@@ -83,12 +85,11 @@ public class OptionsActivity extends Activity implements OnItemSelectedListener 
 			}
 		});
 
-		
-	
 		// Spinner Drop down elements
 		DatabaseCreator.spinnerDataVol(categories);
-		
+
 		List<String> categories1 = new ArrayList<String>();
+		categories1.add(ALL);
 		for (char character = 'a'; character < 'z'; character++) {
 			categories1.add(String.valueOf(character));
 
@@ -131,10 +132,10 @@ public class OptionsActivity extends Activity implements OnItemSelectedListener 
 	}
 
 	private void displayDataALL() {
-		DatabaseCreator.getSongData(b, c, user_name, user_id, user_lyric,
-				user_author);
-		DisplayAdapter disadpt2 = new DisplayAdapter(OptionsActivity.this,
-				user_id, user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt2);
+		DatabaseCreator.getSongData(abcSearch, c, user_name, user_id,
+				user_lyric, user_author);
+		DisplaySearch disadpt = new DisplaySearch(SongsActivity.this, user_id,
+				user_name, user_lyric, user_author);
+		userList.setAdapter(disadpt);
 	}
 }

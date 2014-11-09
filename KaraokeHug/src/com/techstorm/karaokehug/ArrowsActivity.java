@@ -8,10 +8,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
-
- *
- */
 public class ArrowsActivity extends Activity implements View.OnClickListener {
 	
 	public static final String KEY_ROWID = "id";
