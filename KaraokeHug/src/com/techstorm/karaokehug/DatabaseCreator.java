@@ -10,6 +10,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.techstorm.karaokehug.entities.SongEntity;
+
 public class DatabaseCreator {
 
 	public static SQLiteDatabase database;
@@ -103,6 +105,32 @@ public class DatabaseCreator {
 			} while (mCursor2.moveToNext());
 		}
 	}
+	
+	public static SongEntity getSongBySongId(int songId) {
+		String tableName = "ZSONG";
+		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA,ZSABBR,favourite";
+		String where = "ZROWID = " + songId;
+		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
+				select, where);
+		SongEntity song = null;
+		if (mCursor2.moveToFirst()) {
+			song = new SongEntity(
+				mCursor2.getInt(mCursor2
+						.getColumnIndex("ZROWID")), 
+				mCursor2.getString(mCursor2
+						.getColumnIndex("ZSNAME")), 
+				mCursor2.getString(mCursor2
+						.getColumnIndex("ZSLYRIC")), 
+				mCursor2.getString(mCursor2
+						.getColumnIndex("ZSMETA")), 
+				"Arirang 5 số (hầu hết các quán)", 
+				mCursor2.getString(mCursor2
+						.getColumnIndex("ZSABBR")),
+				mCursor2.getShort(mCursor2
+						.getColumnIndex("favourite")));
+		}
+		return song;
+	}
 
 	public static void getFavouriteData(ArrayList<String> user_name,
 			ArrayList<String> user_id, ArrayList<String> user_lyric,
@@ -130,15 +158,16 @@ public class DatabaseCreator {
 
 	}
 
-	public static void spinnerDataVol(List<String> categories) {
+	public static void spinnerDataVol(String prefix, List<String> categories) {
 		String tableName = " ZSONG ";
 		String select = " COUNT(ZSVOL),ZSVOL ";
+		String where = "ZSVOL > 0";
 		String groupby = " ZSVOL ";
 		Cursor mCursor = SqliteExecutor.queryStatement(database, tableName,
-				select, "1", groupby);
+				select, where, groupby);
 		if (mCursor.moveToFirst()) {
 			do {
-				categories.add(mCursor.getString(mCursor
+				categories.add(prefix + mCursor.getString(mCursor
 						.getColumnIndex("ZSVOL")));
 
 			} while (mCursor.moveToNext());

@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams")
-public class DisplaySearch extends BaseAdapter {
+public class DisplaySong extends BaseAdapter {
 	private Context mContext;
 	private ArrayList<String> id;
 	private ArrayList<String> name;
@@ -48,7 +48,7 @@ public class DisplaySearch extends BaseAdapter {
 		if (arg1 == null) {
 			layoutInflater = (LayoutInflater) mContext
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			arg1 = layoutInflater.inflate(R.layout.listsearch, null);
+			arg1 = layoutInflater.inflate(R.layout.layout_song_row, null);
 			mHolder = new Holder();
 			mHolder.txt_id = (TextView) arg1.findViewById(R.id.Txt_id);
 			mHolder.txt_name = (TextView) arg1.findViewById(R.id.Txt_name);
@@ -65,7 +65,7 @@ public class DisplaySearch extends BaseAdapter {
 		return arg1;
 	}
 
-	public DisplaySearch(Context c, ArrayList<String> id,
+	public DisplaySong(Context c, ArrayList<String> id,
 			ArrayList<String> name, ArrayList<String> lyric,
 			ArrayList<String> author) {
 		this.mContext = c;

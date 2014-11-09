@@ -1,13 +1,17 @@
-package com.techstorm.karaokehug;
+package com.techstorm.karaokehug.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplaySong;
+import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.R.id;
+import com.techstorm.karaokehug.R.layout;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +20,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 /**
  * @author
@@ -24,7 +27,8 @@ import android.widget.Toast;
  */
 public class SongsActivity extends Activity implements OnItemSelectedListener {
 
-	private final String ALL = "All";
+	private static final String ALL = "All";
+	private static final String PREFIX_VOL_SEARCH = "Ariang Vol.";
 	private ArrayList<String> user_name = new ArrayList<String>();
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
@@ -32,21 +36,17 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 	private List<String> categories = new ArrayList<String>();
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
-	private Character abcSearch = null;
-	private Integer c;
+	private Character abcSearch = 'A';
+	private Integer volSearch;
 	private ListView userList;
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
 
-		String item = parent.getItemAtPosition(position).toString();
-		c = Integer.parseInt(item);
+		String item = parent.getItemAtPosition(position).toString().replace(PREFIX_VOL_SEARCH, "");
+		volSearch = Integer.parseInt(item);
 		displayDataALL();
-		// Showing selected spinner item
-		Toast.makeText(parent.getContext(), "Selected: " + item,
-				Toast.LENGTH_LONG).show();
-
 	}
 
 	public void onNothingSelected(AdapterView<?> arg0) {
@@ -66,17 +66,13 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
-				if (ALL.equals(arg0.getItemAtPosition(arg2).toString())) {
+				String abc = arg0.getItemAtPosition(arg2).toString();
+				if (ALL.equals(abc)) {
 					abcSearch = null;
 				} else {
-					abcSearch = arg0.getItemAtPosition(arg2).toString()
-							.charAt(0);
-					// Showing selected spinner item
-					Toast.makeText(arg0.getContext(), "Selected: " + abcSearch,
-							Toast.LENGTH_LONG).show();
+					abcSearch = abc.charAt(0);
 				}
 				displayDataALL();
-
 			}
 
 			@Override
@@ -86,11 +82,11 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 		});
 
 		// Spinner Drop down elements
-		DatabaseCreator.spinnerDataVol(categories);
+		DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categories);
 
 		List<String> categories1 = new ArrayList<String>();
-		categories1.add(ALL);
-		for (char character = 'a'; character < 'z'; character++) {
+//		categories1.add(ALL);
+		for (char character = 'A'; character < 'Z'; character++) {
 			categories1.add(String.valueOf(character));
 
 		}
@@ -124,7 +120,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 				intent.putExtra("lyric", (String) map.get("lyric"));
 				intent.putExtra("author", (String) map.get("author"));
 
-				intent.setClass(getApplicationContext(), ArrowsActivity.class);
+				intent.setClass(getApplicationContext(), SongDetailActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -132,9 +128,9 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 	}
 
 	private void displayDataALL() {
-		DatabaseCreator.getSongData(abcSearch, c, user_name, user_id,
+		DatabaseCreator.getSongData(abcSearch, volSearch, user_name, user_id,
 				user_lyric, user_author);
-		DisplaySearch disadpt = new DisplaySearch(SongsActivity.this, user_id,
+		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
 				user_name, user_lyric, user_author);
 		userList.setAdapter(disadpt);
 	}

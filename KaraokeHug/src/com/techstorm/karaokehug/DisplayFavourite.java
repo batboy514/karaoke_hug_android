@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.techstorm.karaokehug.activities.FavouriteActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -50,7 +52,7 @@ import android.widget.TextView;
 		LayoutInflater layoutInflater;
 		if (arg1 == null) {
 			layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			arg1 = layoutInflater.inflate(R.layout.listfavourite, null);
+			arg1 = layoutInflater.inflate(R.layout.layout_favourite_row, null);
 			mHolder = new Holder();
 			mHolder.txt_id = (TextView) arg1.findViewById(R.id.Txt_id);
 			mHolder.txt_name = (TextView) arg1.findViewById(R.id.Txt_name);

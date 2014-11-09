@@ -17,18 +17,17 @@
             android:id="@+id/Txt_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="15sp"
-            android:textStyle="bold|italic"
             android:textColor="@color/textColor"
-             />
+            android:textSize="15sp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/Txt_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
-            android:textSize="15sp"
-            android:textColor="@color/textColor" />
+            android:textColor="@color/textColor"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/Txt_author"
@@ -36,7 +35,6 @@
             android:layout_height="match_parent"
             android:textColor="@color/textColor"
             android:visibility="gone" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -49,10 +47,9 @@
             android:id="@+id/TXT_LYRIC"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="14sp"
             android:textColor="@color/textLightColor"
+            android:textSize="14sp"
             android:visibility="visible" />
-
     </LinearLayout>
 
 </LinearLayout>

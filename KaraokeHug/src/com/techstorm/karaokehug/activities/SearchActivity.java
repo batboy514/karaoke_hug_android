@@ -1,7 +1,13 @@
-package com.techstorm.karaokehug;
+package com.techstorm.karaokehug.activities;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplaySong;
+import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.R.id;
+import com.techstorm.karaokehug.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,7 +74,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				intent.putExtra("id", (String) map.get("id"));
 				intent.putExtra("lyric", (String) map.get("lyric"));
 				intent.putExtra("author", (String) map.get("author"));
-				intent.setClass(getApplicationContext(), ArrowsActivity.class);
+				intent.setClass(getApplicationContext(), SongDetailActivity.class);
 				startActivity(intent);
 				
 			}
@@ -79,7 +85,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private void displayData() {
 		DatabaseCreator.getSearchData(searchVol, searchString, user_name, user_id, user_lyric, user_author);
 		ListView userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
-		DisplaySearch disadpt = new DisplaySearch(SearchActivity.this, user_id,
+		DisplaySong disadpt = new DisplaySong(SearchActivity.this, user_id,
 				user_name, user_lyric, user_author);
 		userlistsearch.setAdapter(disadpt);
 

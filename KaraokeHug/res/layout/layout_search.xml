@@ -13,7 +13,7 @@
             android:id="@+id/textsearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_lable"
+            android:hint="@string/search_label"
             android:layout_marginRight="40dp">
         </EditText>
 
@@ -30,7 +30,7 @@
         android:id="@+id/userlistfavourite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp" >
+        android:layout_marginTop="50dp" >
     </ListView>
 
 </RelativeLayout>

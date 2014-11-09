@@ -1,5 +1,11 @@
-package com.techstorm.karaokehug;
+package com.techstorm.karaokehug.activities;
 
+
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.R.drawable;
+import com.techstorm.karaokehug.R.id;
+import com.techstorm.karaokehug.R.layout;
 
 import android.app.TabActivity;
 import android.content.Intent;

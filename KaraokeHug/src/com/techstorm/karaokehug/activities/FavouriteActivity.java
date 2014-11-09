@@ -1,7 +1,13 @@
-package com.techstorm.karaokehug;
+package com.techstorm.karaokehug.activities;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplayFavourite;
+import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.R.id;
+import com.techstorm.karaokehug.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +31,7 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.favourite);
+        setContentView(R.layout.layout_favourite);
         userlistfavourite = (ListView) findViewById(R.id.userlistfavourite);
        
     	displayDataALL();
@@ -62,7 +68,7 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 		 intent.putExtra("author", (String)map.get("author"));
 		 intent.putExtra("name", (String)map.get("name"));
 		 intent.putExtra("id", (String)map.get("id"));
-intent.setClass(getApplicationContext(), ArrowsActivity.class);
+intent.setClass(getApplicationContext(), SongDetailActivity.class);
             startActivity(intent);
 	}
 
