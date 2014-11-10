@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3CAE5"
+    android:background="@color/backgroundColor"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:padding="8dp" >
@@ -10,7 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.97"
         android:gravity="fill_horizontal|right"
         android:orientation="horizontal" >
 
@@ -18,14 +17,14 @@
             android:id="@+id/Txt_id"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:textColor="#000" />
+            android:textColor="@color/textColor" />
 
         <TextView
             android:id="@+id/Txt_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="60dp"
-            android:textColor="#000" >
+            android:textColor="@color/textColor" >
         </TextView>
 
         <TextView
@@ -43,13 +42,13 @@
             android:layout_weight="7.10"
             android:textColor="#000"
             android:visibility="gone" />
-</LinearLayout>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/btndel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/delnew" />
+    <Button
+        android:id="@+id/btndel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/delnew" />
 
 </RelativeLayout>
