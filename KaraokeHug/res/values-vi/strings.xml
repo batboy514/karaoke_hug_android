@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KaraokeHug</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="spinner_title">Chọn vol</string>
+    <string name="empty_string">-</string>
+    <string name="search_string">Tìm kiếm</string>
+    <string name="favourite_string">Yêu thích</string>
+    <string name="song_string">Bài hát</string>
+    <string name="search_label">Mã số, Tên bài hát, Lời bài hát</string>
+    <string name="song_name_label">Tên bài hát</string>
+    <string name="lyric_label">Lời bài hát</string>
+    <string name="author_label">Tác giả</string>
+    <string name="source_label">Nguồn dữ liệu</string>
+    <string name="favourite_label">Yêu thích</string>
+    <string name="song_id_label">Mã số</string>
+    <string name="quick_search_label">Tìm kiếm nhanh</string>
+    <string name="back_label">Trở lại</string>
+    <string name="ensong_string">Nhạc Ngoại</string>
+    <string name="vnsong_string">Nhạc Việt</string>
+    <string name="allsong_string">Tất cả</string>
+    <string name="categories_device">Danh mục thiết bị</string>
+     <string name="select_languagesong">Chọn loại nhạc</string>
+</resources>

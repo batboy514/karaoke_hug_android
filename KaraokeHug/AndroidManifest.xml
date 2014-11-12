@@ -25,6 +25,7 @@
         <activity android:name="com.techstorm.karaokehug.activities.SongDetailActivity" />
         <activity android:name="com.techstorm.karaokehug.activities.SongsActivity" />
         <activity android:name="com.techstorm.karaokehug.activities.SearchActivity" />
+        <activity android:name="com.techstorm.karaokehug.activities.SettingActivity" />
         <activity android:name="com.techstorm.karaokehug.activities.FavouriteActivity"
             android:clickable="false" />
     </application>

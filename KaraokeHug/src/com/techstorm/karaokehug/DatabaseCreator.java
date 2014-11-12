@@ -1,6 +1,7 @@
 package com.techstorm.karaokehug;
 
 import java.io.IOException;
+import java.text.ChoiceFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,13 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.techstorm.karaokehug.activities.SettingActivity;
 import com.techstorm.karaokehug.entities.SongEntity;
 
 public class DatabaseCreator {
 
 	public static SQLiteDatabase database;
-
-	public static SQLiteDatabase openDatabase(Context context) {
+		public static SQLiteDatabase openDatabase(Context context) {
 		DatabaseHelper myDbHelper = new DatabaseHelper(context);
 
 		try {
@@ -77,34 +78,97 @@ public class DatabaseCreator {
 		mCursor2.close();
 	}
 
-	public static void getSongData(Character abcSearch, int vol, ArrayList<String> user_name,
+	public static void getSongDataVietNam(Character abcSearch, int vol, ArrayList<String> user_name,
 			ArrayList<String> user_id, ArrayList<String> user_lyric,
 			ArrayList<String> user_author) {
-		String tableName = "ZSONG";
-		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-		String where = "ZSVOL <= " + vol;
-		if (abcSearch != null) {
-			where += " AND ZSABBR like '" + abcSearch + "%'";
+	
+			String tableName = "ZSONG";
+			String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
+			String where = "ZSVOL <= " + vol + " and ZSLANGUAGE like 'vn'";
+			if (abcSearch != null) {
+				where += " AND ZSABBR like '" + abcSearch + "%' and ZSLANGUAGE like 'vn'";
+			}
+			Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
+					select, where);
+			user_name.clear();
+			user_id.clear();
+			user_lyric.clear();
+			user_author.clear();
+			if (mCursor2.moveToFirst()) {
+				do {
+					user_id.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZROWID")));
+					user_name.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSNAME")));
+					user_lyric.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSLYRIC")));
+					user_author.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSMETA")));
+				} while (mCursor2.moveToNext());
+			}
 		}
-		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
-				select, where);
-		user_name.clear();
-		user_id.clear();
-		user_lyric.clear();
-		user_author.clear();
-		if (mCursor2.moveToFirst()) {
-			do {
-				user_id.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZROWID")));
-				user_name.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSNAME")));
-				user_lyric.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSLYRIC")));
-				user_author.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSMETA")));
-			} while (mCursor2.moveToNext());
+		
+	public static void getSongDataEngLish(Character abcSearch, int vol, ArrayList<String> user_name,
+			ArrayList<String> user_id, ArrayList<String> user_lyric,
+			ArrayList<String> user_author) {
+	
+			String tableName = "ZSONG";
+			String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
+			String where = "ZSVOL <= " + vol + " and ZSLANGUAGE like 'en'";
+			if (abcSearch != null) {
+				where += " AND ZSABBR like '" + abcSearch + "%' and ZSLANGUAGE like 'en'";
+			}
+			Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
+					select, where);
+			user_name.clear();
+			user_id.clear();
+			user_lyric.clear();
+			user_author.clear();
+			if (mCursor2.moveToFirst()) {
+				do {
+					user_id.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZROWID")));
+					user_name.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSNAME")));
+					user_lyric.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSLYRIC")));
+					user_author.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSMETA")));
+				} while (mCursor2.moveToNext());
+			}
 		}
-	}
+	public static void getSongDataAll(Character abcSearch, int vol, ArrayList<String> user_name,
+			ArrayList<String> user_id, ArrayList<String> user_lyric,
+			ArrayList<String> user_author) {
+	
+			String tableName = "ZSONG";
+			String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
+			String where = "ZSVOL <= " + vol + "";
+			if (abcSearch != null) {
+				where += " AND ZSABBR like '" + abcSearch + "%'";
+			}
+			Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
+					select, where);
+			user_name.clear();
+			user_id.clear();
+			user_lyric.clear();
+			user_author.clear();
+			if (mCursor2.moveToFirst()) {
+				do {
+					user_id.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZROWID")));
+					user_name.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSNAME")));
+					user_lyric.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSLYRIC")));
+					user_author.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSMETA")));
+				} while (mCursor2.moveToNext());
+			}
+		}
+		
+		
+	
 	
 	public static SongEntity getSongBySongId(int songId) {
 		String tableName = "ZSONG";

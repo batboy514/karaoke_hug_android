@@ -5,7 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="spinner_title">Select Category</string>
     <string name="empty_string">-</string>
-    
+        <string name="ensong_string">English Song</string>
+    <string name="vnsong_string">VietNam Song</string>
+    <string name="allsong_string">All Song</string>
+    <string name="search_string">Search</string>
+    <string name="favourite_string">Favourites</string>
+    <string name="song_string">Song</string>
     <string name="search_label">ID, name, lyric</string>
     <string name="song_name_label">Name</string>
     <string name="lyric_label">Lyric</string>
@@ -15,4 +20,6 @@
     <string name="song_id_label">#</string>
     <string name="quick_search_label">Quick search</string>
     <string name="back_label">Back</string>
+        <string name="select_languagesong">Select music</string>
+    <string name="categories_device">categories device</string>
 </resources>
