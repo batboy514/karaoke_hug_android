@@ -38,7 +38,7 @@ public class DatabaseCreator {
 	}
 
 	@SuppressLint("DefaultLocale")
-	public static void getSearchData(Integer searchVol, String searchString,
+	public static Boolean getSearchData(Integer searchVol, String searchString,
 			ArrayList<String> user_name, ArrayList<String> user_id,
 			ArrayList<String> user_lyric, ArrayList<String> user_author) {
 
@@ -58,24 +58,30 @@ public class DatabaseCreator {
 		
 		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
 				select, where);
-		user_name.clear();
-		user_id.clear();
-		user_lyric.clear();
-		user_author.clear();
+		
+			user_name.clear();
+			user_id.clear();
+			user_lyric.clear();
+			user_author.clear();
 
-		if (mCursor2.moveToFirst()) {
-			do {
-				user_id.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZROWID")));
-				user_name.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSNAME")));
-				user_lyric.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSLYRIC")));
-				user_author.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSMETA")));
-			} while (mCursor2.moveToNext());
-		}
-		mCursor2.close();
+			if (mCursor2.moveToFirst()) {
+				do {
+					user_id.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZROWID")));
+					user_name.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSNAME")));
+					user_lyric.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSLYRIC")));
+					user_author.add(mCursor2.getString(mCursor2
+							.getColumnIndex("ZSMETA")));
+				} while (mCursor2.moveToNext());
+			} else {
+//				mCursor2.close();
+				return false;
+			}
+			mCursor2.close();
+		
+		return true;
 	}
 
 	public static void getSongDataVietNam(Character abcSearch, int vol, ArrayList<String> user_name,

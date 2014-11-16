@@ -16,6 +16,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
@@ -27,7 +28,7 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 		private ArrayList<String> user_id = new ArrayList<String>();
 		private ArrayList<String> user_lyric = new ArrayList<String>();
 		private ArrayList<String> user_author = new ArrayList<String>();
-		
+		int backButtonCount = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,5 +77,20 @@ intent.setClass(getApplicationContext(), SongDetailActivity.class);
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		
+	}
+	public void onBackPressed()
+	{
+	    if(backButtonCount >= 1)
+	    {
+	        Intent intent = new Intent(Intent.ACTION_MAIN);
+	        intent.addCategory(Intent.CATEGORY_HOME);
+	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        startActivity(intent);
+	    }
+	    else
+	    {
+	        Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+	        backButtonCount++;
+	    }
 	}
 }

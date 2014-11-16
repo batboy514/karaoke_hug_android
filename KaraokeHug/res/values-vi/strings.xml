@@ -22,4 +22,5 @@
     <string name="allsong_string">Tất cả</string>
     <string name="categories_device">Danh mục thiết bị</string>
      <string name="select_languagesong">Chọn loại nhạc</string>
+      <string name="check_song">Không tìm thấy bài hát</string>
 </resources>

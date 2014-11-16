@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/selectorWrap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
 
         <Spinner
             android:id="@+id/spinner"
@@ -22,16 +22,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:prompt="@string/spinner_title" />
-    </RelativeLayout>
 
+       
+
+    </RelativeLayout>
+ <com.google.android.gms.ads.AdView
+            android:id="@+id/banner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" 
+            android:layout_marginTop="42dp">
+        </com.google.android.gms.ads.AdView>
     <ListView
         android:id="@+id/list1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="91dp"
         android:drawSelectorOnTop="true"
         android:fastScrollEnabled="true" >
-
     </ListView>
 
 </RelativeLayout>

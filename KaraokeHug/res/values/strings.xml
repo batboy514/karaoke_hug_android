@@ -22,4 +22,6 @@
     <string name="back_label">Back</string>
         <string name="select_languagesong">Select music</string>
     <string name="categories_device">categories device</string>
+    <string name="check_song">Can\'t find any song</string>
+    
 </resources>

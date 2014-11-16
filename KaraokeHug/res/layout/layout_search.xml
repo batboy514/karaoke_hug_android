@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -13,8 +15,8 @@
             android:id="@+id/textsearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search_label"
-            android:layout_marginRight="40dp">
+            android:layout_marginRight="40dp"
+            android:hint="@string/search_label" >
         </EditText>
 
         <ImageButton
@@ -23,14 +25,30 @@
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:adjustViewBounds="true"
-            android:background="@drawable/search_128"/>
+            android:background="@drawable/search_128" />
     </RelativeLayout>
-
+     <TextView
+        android:id="@+id/Txt_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:textColor="@color/textColor" />
+<com.google.android.gms.ads.AdView
+        android:id="@+id/banner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3832064664277561/8715403331" />
+    
     <ListView
         android:id="@+id/userlistfavourite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" >
+        android:layout_marginTop="90dp" >
     </ListView>
 
+   
+
+    
 </RelativeLayout>

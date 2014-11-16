@@ -8,13 +8,15 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
+<!--     <uses-permission android:name="android.permission.INTERNET" /> -->
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-      >
+        android:theme="@android:style/Theme.NoTitleBar"
+        android:label="@string/app_name" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.techstorm.karaokehug.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +24,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ArrowsActivity"/>		
-		<activity android:name="OptionsActivity" />
-		<activity android:name="SearchActivity" />
-				<activity android:name="FavouriteActivity" />
-		
+        <activity android:name="com.techstorm.karaokehug.activities.SongDetailActivity" />
+        <activity android:name="com.techstorm.karaokehug.activities.SongsActivity" />
+        <activity android:name="com.techstorm.karaokehug.activities.SearchActivity" />
+        <activity android:name="com.techstorm.karaokehug.activities.SettingActivity" />
+        <activity android:name="com.techstorm.karaokehug.activities.FavouriteActivity"
+            android:clickable="false" />
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+         <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCdiQBr_HD0Zy4k8DdUinbPXUbS67Hk2YM" />
     </application>
 
 </manifest>

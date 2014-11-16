@@ -15,7 +15,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.DisplaySong;
 import com.techstorm.karaokehug.R;
@@ -39,7 +42,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 	private Integer volSearch;
 	private ListView userList;
 	private Context context;
-
+	int backButtonCount = 0;
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
@@ -72,7 +75,14 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// empty
 	}
-
+	private void showBanner(int id) {
+		AdView adView = (AdView) findViewById(id);
+	    AdRequest adRequest = new AdRequest.Builder()
+//	        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//	        .addTestDevice(TEST_DEVICE_ID)
+	        .build();
+	    adView.loadAd(adRequest);
+	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this.getApplicationContext();
@@ -219,5 +229,19 @@ public class SongsActivity extends Activity implements OnItemSelectedListener {
 			displayDataEn();
 		}
 	}
-
+	public void onBackPressed()
+	{
+	    if(backButtonCount >= 1)
+	    {
+	        Intent intent = new Intent(Intent.ACTION_MAIN);
+	        intent.addCategory(Intent.CATEGORY_HOME);
+	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        startActivity(intent);
+	    }
+	    else
+	    {
+	        Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+	        backButtonCount++;
+	    }
+	}
 }
