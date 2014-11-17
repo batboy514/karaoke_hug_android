@@ -45,8 +45,9 @@ public class SqliteExecutor {
 	public static Cursor queryStatement(SQLiteDatabase database, String tableName, String select, String where) {
 		return database.rawQuery("SELECT "+select+" FROM " + tableName + " WHERE " + where + ";", null);
 	}
-	public static Cursor queryStatement(SQLiteDatabase database, String tableName, String select, String where, String groupby) {
-		return database.rawQuery("SELECT "+select+" FROM " + tableName + " WHERE " + where + " GROUP BY " + groupby + ";" , null);
+	
+	public static Cursor queryStatement(SQLiteDatabase database, String tableName, String select, String where, String groupby, String orderby) {
+		return database.rawQuery("SELECT "+select+" FROM " + tableName + " WHERE " + where + " GROUP BY " + groupby + " Order by " + orderby +";" , null);
 	}
 	public static void insertStatement(SQLiteDatabase database, String tableName, String... values) {
 		database.execSQL("INSERT INTO " + tableName + " Values ("+buildValues(values)+");");

@@ -16,6 +16,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -39,15 +40,19 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
     	userlistfavourite.setClickable(true);
     	userlistfavourite.setOnItemSelectedListener(this);
     	userlistfavourite.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
+    	
         
 	}
 	
 	
 	public void displayDataALL( ) {
-		
-			DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
-			DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,user_id, user_name, user_lyric, user_author);
+			
+		Boolean hasdata = DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
+		if (hasdata == false) {
+			TextView textdata = (TextView) findViewById(R.id.textdata);
+			textdata.setText(this.getApplicationContext().getString(R.string.no_data));
+		}
+		DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,user_id, user_name, user_lyric, user_author);
 					userlistfavourite.setAdapter(disadpt2);
 				
 	}

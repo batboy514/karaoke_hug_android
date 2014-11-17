@@ -25,13 +25,7 @@ import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends TabActivity implements OnTabChangeListener {
-	private Character abcSearch = 'A';
-	private Integer volSearch;
-	private ListView userList;
-	private ArrayList<String> user_name = new ArrayList<String>();
-	private ArrayList<String> user_lyric = new ArrayList<String>();
-	private ArrayList<String> user_author = new ArrayList<String>();
-	private ArrayList<String> user_id = new ArrayList<String>();
+	
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
 

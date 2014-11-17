@@ -33,13 +33,18 @@
             android:layout_alignParentLeft="true" 
             android:layout_marginTop="42dp">
         </com.google.android.gms.ads.AdView>
+
     <ListView
         android:id="@+id/list1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="91dp"
         android:drawSelectorOnTop="true"
-        android:fastScrollEnabled="true" >
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"
+        android:layoutMode="clipBounds"
+        android:overScrollMode="ifContentScrolls" >
+
     </ListView>
 
 </RelativeLayout>

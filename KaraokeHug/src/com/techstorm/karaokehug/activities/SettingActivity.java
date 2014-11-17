@@ -14,30 +14,50 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.R;
 
 public class SettingActivity extends Activity implements OnItemSelectedListener {
 	Spinner spinner;
 	TextView text1;
 	int backButtonCount = 0;
-	public static String itemselected ;
+	public static String itemselected;
+	public static String itemproductselected;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_setting);
-//		  Spinner spinner1 = (Spinner) findViewById(R.id.spinnermachine);	        
-//	        spinner1.setOnItemSelectedListener(this);
-//	        List<String> categories1 = new ArrayList<String>();
-//	        categories1.add("Đầu karaoke Arirang 5 số");   
-//	        categories1.add("Đầu karaoke california 6 số");   
-//			ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories1);
-//			dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);			
-//			spinner1.setAdapter(dataAdapter1);
-		 spinner = (Spinner) findViewById(R.id.spinnersetting);
+		Spinner spinnerproduct = (Spinner) findViewById(R.id.spinnerproduct);
+		List<String> categories1 = new ArrayList<String>();
+		DatabaseCreator.spinnerDataProduct(categories1);
+		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, categories1);
+		dataAdapter1
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerproduct.setAdapter(dataAdapter1);
+		spinnerproduct.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				itemproductselected = arg0.getItemAtPosition(arg2).toString();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		spinner = (Spinner) findViewById(R.id.spinnersetting);
 		spinner.setOnItemSelectedListener(this);
 		List<String> categories = new ArrayList<String>();
-		categories.add(this.getApplicationContext().getString(R.string.allsong_string));
-		categories.add(this.getApplicationContext().getString(R.string.vnsong_string));
-		categories.add(this.getApplicationContext().getString(R.string.ensong_string));
+		categories.add(this.getApplicationContext().getString(
+				R.string.allsong_string));
+		categories.add(this.getApplicationContext().getString(
+				R.string.vnsong_string));
+		categories.add(this.getApplicationContext().getString(
+				R.string.ensong_string));
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, categories);
 		dataAdapter
@@ -48,8 +68,8 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View arg0, int arg2,
 			long arg3) {
-	 itemselected = parent.getItemAtPosition(arg2).toString();	
-	
+		itemselected = parent.getItemAtPosition(arg2).toString();
+		
 	}
 
 	@Override
@@ -57,19 +77,19 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 		// TODO Auto-generated method stub
 
 	}
-	public void onBackPressed()
-	{
-	    if(backButtonCount >= 1)
-	    {
-	        Intent intent = new Intent(Intent.ACTION_MAIN);
-	        intent.addCategory(Intent.CATEGORY_HOME);
-	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	        startActivity(intent);
-	    }
-	    else
-	    {
-	        Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
-	        backButtonCount++;
-	    }
+
+	public void onBackPressed() {
+		if (backButtonCount >= 1) {
+			Intent intent = new Intent(Intent.ACTION_MAIN);
+			intent.addCategory(Intent.CATEGORY_HOME);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			startActivity(intent);
+		} else {
+			Toast.makeText(
+					this,
+					"Press the back button once again to close the application.",
+					Toast.LENGTH_SHORT).show();
+			backButtonCount++;
+		}
 	}
 }

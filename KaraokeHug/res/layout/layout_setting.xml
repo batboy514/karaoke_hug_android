@@ -5,31 +5,28 @@
     android:layout_gravity="clip_vertical" >
 
     <Spinner
+        android:id="@+id/spinnerproduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="103dp" />
+
+    <Spinner
         android:id="@+id/spinnersetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="98dp"
+        android:layout_marginBottom="94dp"
         android:ellipsize="marquee"
         android:prompt="@string/select_languagesong" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textdata"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
+        android:layout_centerVertical="true"
         android:text="@string/select_languagesong"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Spinner
-        android:id="@+id/spinnermachine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/spinnersetting"
-        android:layout_marginTop="103dp" />
 
 </RelativeLayout>
