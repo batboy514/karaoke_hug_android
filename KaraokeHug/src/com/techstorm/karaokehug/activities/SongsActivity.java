@@ -58,9 +58,11 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		}
 
 		if (choice.contains(context.getString(R.string.allsong_string))) {
-			String item = parent.getItemAtPosition(position).toString()
-					.replace(PREFIX_VOL_SEARCH, "");
-			
+			String item = null;
+			if (parent.getItemAtPosition(position) != null) {
+				item = parent.getItemAtPosition(position).toString()
+						.replace(PREFIX_VOL_SEARCH, "");
+			}
 			volSearch = IntegerUtil.valueOf(item);
 			displayDataAll();
 		}
