@@ -33,13 +33,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:textColor="@color/textColor" />
-<com.google.android.gms.ads.AdView
-        android:id="@+id/banner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3832064664277561/8715403331" />
+	<com.google.android.gms.ads.AdView
+	        android:id="@+id/banner1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="40dp"
+	        ads:adSize="BANNER"
+	        ads:adUnitId="ca-app-pub-7278887713829891/7424273163" />
     
     <ListView
         android:id="@+id/userlistfavourite"

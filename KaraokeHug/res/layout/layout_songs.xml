@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="clip_vertical" >
@@ -31,7 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true" 
-            android:layout_marginTop="42dp">
+            android:layout_marginTop="42dp"
+            ads:adSize="BANNER"
+	        ads:adUnitId="ca-app-pub-7278887713829891/7737487560">
         </com.google.android.gms.ads.AdView>
 
     <ListView
