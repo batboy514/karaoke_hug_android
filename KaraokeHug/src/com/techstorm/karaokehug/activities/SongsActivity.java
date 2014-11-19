@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater.Filter;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -42,13 +43,14 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	private List<String> categories = new ArrayList<String>();
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
-	private Character abcSearch = 'A';
+	private Character abcSearch = '#';
 	private Integer volSearch = 0;
 	private ListView userList;
 	private Context context;
 	int backButtonCount = 0;
 	Spinner spinner;
 	Spinner spinner1;
+	String a;
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
@@ -111,18 +113,18 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				String abc = arg0.getItemAtPosition(arg2).toString();
-
 				String choice = SettingActivity.itemselected;
+				a = arg0.getItemAtPosition(arg2).toString();
 				if (choice == null) {
 					choice = context.getString(R.string.allsong_string);
 				}
 				if (choice.contains(context.getString(R.string.allsong_string))) {
-					if (ALL.equals(abc)) {
-						abcSearch = null;
-					} else {
-						abcSearch = abc.charAt(0);
-					}
+					if (abcSearch == '#') {
+						displayDataNumber();
+					}else{
+					abcSearch = abc.charAt(0);
 					displayDataAll();
+				}
 				}
 				if (choice.contains(context.getString(R.string.vnsong_string))) {
 					if (ALL.equals(abc)) {
@@ -189,9 +191,9 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 
 		List<String> categories1 = new ArrayList<String>();
 		// categories1.add(ALL);
+		categories1.add("#");
 		for (char character = 'A'; character < 'Z'; character++) {
 			categories1.add(String.valueOf(character));
-
 		}
 
 		// Creating adapter for spinner
@@ -251,6 +253,16 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 					user_name, user_lyric, user_author);
 			userList.setAdapter(disadpt);
 		}
+	}
+
+	public void displayDataNumber() {
+
+		DatabaseCreator.getSongDataNumber(abcSearch, volSearch, user_name,
+				user_id, user_lyric, user_author);
+		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
+				user_name, user_lyric, user_author);
+		userList.setAdapter(disadpt);
+
 	}
 
 	public void displayDataAll() {
