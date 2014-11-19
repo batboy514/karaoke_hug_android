@@ -13,6 +13,7 @@ import com.techstorm.karaokehug.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -132,5 +133,11 @@ public class SearchActivity extends Activity implements OnClickListener {
 	        Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
 	        backButtonCount++;
 	    }
+	}
+	public void ShowMedia(){
+		
+	
+	
+	
 	}
 }

@@ -16,11 +16,13 @@ import android.widget.Toast;
 
 import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.entities.SaveEntity;
 
 public class SettingActivity extends Activity implements OnItemSelectedListener {
 	Spinner spinner;
 	TextView text1;
 	int backButtonCount = 0;
+	int a;
 	public static String itemselected;
 	public static String itemproductselected;
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,19 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 		dataAdapter1
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerproduct.setAdapter(dataAdapter1);
+//		a = Integer.parseInt(itemproductselected);
+		Toast.makeText(
+				this,
+				itemproductselected,
+				Toast.LENGTH_SHORT).show();
+		for (String item : categories1) {
+			if (itemproductselected.equals(item)) {
+				spinnerproduct.setSelection(categories1.indexOf(item));
+				break;
+			}
+		}
+
+		
 		spinnerproduct.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -41,6 +56,11 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				itemproductselected = arg0.getItemAtPosition(arg2).toString();
+				DatabaseCreator.saveMedia();
+				SaveEntity saveEntity = DatabaseCreator.showMedia();
+				SettingActivity.itemproductselected = saveEntity.getMedia(); 
+						
+				SettingActivity.itemselected = saveEntity.getLanguage();
 			}
 
 			@Override
@@ -64,7 +84,7 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(dataAdapter);
 	}
-
+	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View arg0, int arg2,
 			long arg3) {

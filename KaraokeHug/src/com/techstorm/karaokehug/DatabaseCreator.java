@@ -12,6 +12,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.techstorm.karaokehug.activities.SettingActivity;
+import com.techstorm.karaokehug.entities.SaveEntity;
 import com.techstorm.karaokehug.entities.SongEntity;
 
 public class DatabaseCreator {
@@ -342,5 +343,24 @@ public class DatabaseCreator {
 		String criterial = "ZROWID = " + id;
 		SqliteExecutor.deleteStatement(database, tableName, criterial);
 
+	}
+	public static void saveMedia(){
+		String tableName = " Z_CONFIG ";
+		String a = SettingActivity.itemproductselected;
+		String setting = " Z_MEDIACHOICE = '" + a + "'";
+		SqliteExecutor.updateStatement(database, tableName, setting);
+	}
+	public static SaveEntity showMedia(){
+		String tableName = "Z_CONFIG";
+		String select = " Z_MEDIACHOICE,Z_LANGUAGE ";
+		Cursor mCursor = SqliteExecutor.queryStatement(database, tableName, select);
+		SaveEntity save = null;
+		if (mCursor.moveToFirst()) {
+			save = new SaveEntity(mCursor.getString(mCursor
+					.getColumnIndex("Z_MEDIACHOICE")), mCursor.getString(mCursor
+					.getColumnIndex("Z_LANGUAGE")));
+		}
+		return save;
+		
 	}
 }

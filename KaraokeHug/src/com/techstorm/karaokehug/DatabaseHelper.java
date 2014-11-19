@@ -145,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
  
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
- 
+		String s = "";
 	}
  
         // Add your public helper methods to access and get content from the database.

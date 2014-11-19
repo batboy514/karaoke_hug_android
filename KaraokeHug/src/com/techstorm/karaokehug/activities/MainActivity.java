@@ -3,13 +3,6 @@ package com.techstorm.karaokehug.activities;
 
 import java.util.ArrayList;
 
-import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.DisplaySong;
-import com.techstorm.karaokehug.R;
-import com.techstorm.karaokehug.R.drawable;
-import com.techstorm.karaokehug.R.id;
-import com.techstorm.karaokehug.R.layout;
-
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
+
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.R;
+import com.techstorm.karaokehug.entities.SaveEntity;
 
 
 @SuppressWarnings("deprecation")
@@ -28,7 +25,8 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 	
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
-
+	private ArrayList<String> media1 = new ArrayList<String>();
+	private ArrayList<String> language = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +34,16 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		setTabs();
 		TabHost tabHost = getTabHost();
 		tabHost.setOnTabChangedListener(this);
+		SaveEntity saveEntity = DatabaseCreator.showMedia();
+		Toast.makeText(
+				this,
+				saveEntity.getMedia(),
+				Toast.LENGTH_SHORT).show();
+		SettingActivity.itemproductselected = saveEntity.getMedia(); 
+				
+		SettingActivity.itemselected = saveEntity.getLanguage();
+	
+		String g ="";
     }
        
     private void setTabs()
