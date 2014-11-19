@@ -1,7 +1,6 @@
 package com.techstorm.karaokehug;
 
 import java.io.IOException;
-import java.text.ChoiceFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,13 +164,16 @@ public class DatabaseCreator {
 		return false;
 	}
 
-	public static Boolean getSongDataAll(Character abcSearch, Integer vol,
+	public static Boolean getSongDataAll(Character abcSearch, Integer vol, String languageCode,
 			ArrayList<String> user_name, ArrayList<String> user_id,
 			ArrayList<String> user_lyric, ArrayList<String> user_author) {
 		String productchoice = SettingActivity.itemproductselected;
 		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
 		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
 		String where = "Z_NAME like '" + productchoice + "'";
+		if (languageCode != null) {
+			where += " AND ZSLANGUAGE = '" + languageCode + "' ";
+		}
 		if (vol != null) {
 			where += " AND ZSVOL <= " + vol + " ";
 		}

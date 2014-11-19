@@ -3,17 +3,8 @@ package com.techstorm.karaokehug.activities;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.DisplaySong;
-import com.techstorm.karaokehug.R;
-import com.techstorm.karaokehug.R.id;
-import com.techstorm.karaokehug.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +15,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplaySong;
+import com.techstorm.karaokehug.R;
 
 public class SearchActivity extends Activity implements OnClickListener {
 	

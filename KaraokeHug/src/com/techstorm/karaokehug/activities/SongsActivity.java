@@ -53,12 +53,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
-		String choice = SettingActivity.itemselected;
-		if (choice == null) {
-			choice = context.getString(R.string.allsong_string);
-		}
 
-		if (choice.contains(context.getString(R.string.allsong_string))) {
 			String item = null;
 			if (parent.getItemAtPosition(position) != null) {
 				item = parent.getItemAtPosition(position).toString()
@@ -66,20 +61,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			}
 			volSearch = IntegerUtil.valueOf(item);
 			displayDataAll();
-		}
-		if (choice.contains(context.getString(R.string.vnsong_string))) {
-			String item = parent.getItemAtPosition(position).toString()
-					.replace(PREFIX_VOL_SEARCH, "");
-			volSearch = IntegerUtil.valueOf(item);
-			displayDataVn();
-		}
-		if (choice.contains(context.getString(R.string.ensong_string))) {
-			String item = parent.getItemAtPosition(position).toString()
-					.replace(PREFIX_VOL_SEARCH, "");
-			volSearch = IntegerUtil.valueOf(item);
-			displayDataEn();
-		}
-
+		displayDataAll();
 	}
 
 	public void onNothingSelected(AdapterView<?> arg0) {
@@ -112,35 +94,12 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 					int arg2, long arg3) {
 				String abc = arg0.getItemAtPosition(arg2).toString();
 
-				String choice = SettingActivity.itemselected;
-				if (choice == null) {
-					choice = context.getString(R.string.allsong_string);
+				if (ALL.equals(abc)) {
+					abcSearch = null;
+				} else {
+					abcSearch = abc.charAt(0);
 				}
-				if (choice.contains(context.getString(R.string.allsong_string))) {
-					if (ALL.equals(abc)) {
-						abcSearch = null;
-					} else {
-						abcSearch = abc.charAt(0);
-					}
-					displayDataAll();
-				}
-				if (choice.contains(context.getString(R.string.vnsong_string))) {
-					if (ALL.equals(abc)) {
-						abcSearch = null;
-					} else {
-						abcSearch = abc.charAt(0);
-					}
-					displayDataVn();
-				}
-				if (choice.contains(context.getString(R.string.ensong_string))) {
-					if (ALL.equals(abc)) {
-						abcSearch = null;
-					} else {
-						abcSearch = abc.charAt(0);
-					}
-					displayDataEn();
-				}
-
+				displayDataAll();
 			}
 
 			@Override
@@ -211,51 +170,19 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		spinner1.setAdapter(dataAdapter1);
 	}
 
-	public void displayDataEn() {
-		if (volSearch == null) {
-			spinner = (Spinner) findViewById(R.id.spinner);
-			spinner.setOnItemSelectedListener(this);
-			List<String> categories = new ArrayList<String>();
-			categories.add("không có gì");
-			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-					android.R.layout.simple_spinner_item, categories);
-			dataAdapter
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner.setAdapter(dataAdapter);
-		} else {
-			DatabaseCreator.getSongDataEngLish(abcSearch, volSearch, user_name,
-					user_id, user_lyric, user_author);
-			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-					user_name, user_lyric, user_author);
-			userList.setAdapter(disadpt);
-		}
-	}
-
-	public void displayDataVn() {
-		Boolean hasdata = DatabaseCreator.getSongDataVietNam(abcSearch,
-				volSearch, user_name, user_id, user_lyric, user_author);
-		if (hasdata == false) {
-			spinner = (Spinner) findViewById(R.id.spinner);
-			spinner.setOnItemSelectedListener(this);
-			List<String> categories = new ArrayList<String>();
-			categories.add("không có gì");
-			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-					android.R.layout.simple_spinner_item, categories);
-			dataAdapter
-					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spinner.setAdapter(dataAdapter);
-		} else {
-			DatabaseCreator.getSongDataVietNam(abcSearch, volSearch, user_name,
-					user_id, user_lyric, user_author);
-			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-					user_name, user_lyric, user_author);
-			userList.setAdapter(disadpt);
-		}
-	}
-
 	public void displayDataAll() {
+		String choice = SettingActivity.itemselected;
 
-		DatabaseCreator.getSongDataAll(abcSearch, volSearch, user_name,
+		String languageCode = null;
+		if (choice.contains(this.getString(R.string.vnsong_string))) {
+			languageCode = "vn";
+		}
+		if (choice.contains(this.getString(R.string.ensong_string))) {
+			languageCode = "en";
+		}
+		
+		
+		DatabaseCreator.getSongDataAll(abcSearch, volSearch, languageCode, user_name,
 				user_id, user_lyric, user_author);
 		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
 				user_name, user_lyric, user_author);
@@ -267,20 +194,8 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	protected void onResume() {
 		super.onResume();
 		updateData();
-		String choice = SettingActivity.itemselected;
-		if (choice == null) {
-			choice = this.getApplicationContext().getString(
-					R.string.allsong_string);
-		}
-		if (choice.contains(this.getString(R.string.allsong_string))) {
-			displayDataAll();
-		}
-		if (choice.contains(this.getString(R.string.vnsong_string))) {
-			displayDataVn();
-		}
-		if (choice.contains(this.getString(R.string.ensong_string))) {
-			displayDataEn();
-		}
+		displayDataAll();
+
 	}
 
 	public void onBackPressed() {
