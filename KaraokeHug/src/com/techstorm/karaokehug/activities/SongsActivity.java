@@ -34,7 +34,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		OnScrollListener {
 
 	private static final String ALL = "All";
-	private static final String PREFIX_VOL_SEARCH = "Ariang Vol.";
+	private static final String PREFIX_VOL_SEARCH = " Vol.";
 	private ArrayList<String> user_name = new ArrayList<String>();
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
@@ -57,10 +57,9 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			String item = null;
 			if (parent.getItemAtPosition(position) != null) {
 				item = parent.getItemAtPosition(position).toString()
-						.replace(PREFIX_VOL_SEARCH, "");
+						.replace(SettingActivity.itemselected + PREFIX_VOL_SEARCH, "");
 			}
 			volSearch = IntegerUtil.valueOf(item);
-			displayDataAll();
 		displayDataAll();
 	}
 

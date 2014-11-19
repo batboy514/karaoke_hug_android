@@ -199,7 +199,7 @@ public class DatabaseCreator {
 		categories.clear();
 		if (mCursor.moveToFirst()) {
 			do {
-				categories.add(productchoice + " "
+				categories.add(productchoice + prefix
 						+ mCursor.getString(mCursor.getColumnIndex("ZSVOL")));
 
 			} while (mCursor.moveToNext());
