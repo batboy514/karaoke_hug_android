@@ -32,13 +32,13 @@
      android:configChanges="keyboardHidden|orientation"/>
                 <activity android:name="com.techstorm.karaokehug.activities.MainActivity"
                     android:screenOrientation="portrait"
-     android:configChanges="keyboardHidden|orientation" />
+    />
         <activity android:name="com.techstorm.karaokehug.activities.SearchActivity" 
             android:screenOrientation="portrait"
      android:configChanges="keyboardHidden|orientation"/>
         <activity android:name="com.techstorm.karaokehug.activities.SettingActivity" 
             android:screenOrientation="portrait"
-     android:configChanges="keyboardHidden|orientation"/>
+   />
         <activity
             android:name="com.techstorm.karaokehug.activities.FavouriteActivity"
             android:clickable="false" />
