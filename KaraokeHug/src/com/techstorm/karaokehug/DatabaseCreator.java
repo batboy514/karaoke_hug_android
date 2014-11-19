@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.techstorm.karaokehug.activities.SettingActivity;
 import com.techstorm.karaokehug.entities.SaveEntity;
 import com.techstorm.karaokehug.entities.SongEntity;
+import com.techstorm.karaokehug.utilities.SqlCode;
 
 public class DatabaseCreator {
 
@@ -50,7 +51,7 @@ public class DatabaseCreator {
 		if (searchVol != null) {
 			where += " AND ZROWID = "+ String.valueOf(searchVol) + " ";
 		} else {
-			String search = searchString.toLowerCase();
+			String search = SqlCode.encode(searchString.toLowerCase());
 			where += "  AND (ZSNAMECLEAN like '" + search + "%' "
 					+ "or ZSLYRICCLEAN like '" + search + "%' "
 					+ "or ZSABBR like '" + search + "%')";
@@ -248,10 +249,10 @@ public class DatabaseCreator {
 
 	public static void addFavourite(SongEntity song) {
 		int id = song.getSongId();
-		String name = song.getName();
-		String author = song.getAuthor();
-		String lyric = song.getLyric();
-		String quicksearch = song.getQuickSearch();
+		String name = SqlCode.encode(song.getName());
+		String author = SqlCode.encode(song.getAuthor());
+		String lyric = SqlCode.encode(song.getLyric());
+		String quicksearch = SqlCode.encode(song.getQuickSearch());
 		String tableName = "ZFAVORITE(ZROWID,ZSNAME,ZSLYRIC,ZSMETA,ZSABBR)";
 //		String values = "" + id + "," + name + "," + lyric 
 //				+ "," + author + "," + quicksearch;

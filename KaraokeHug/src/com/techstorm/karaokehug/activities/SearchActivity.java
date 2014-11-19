@@ -70,7 +70,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 				Map<String, Object> map = (Map<String, Object>) userlistsearch
 						.getItemAtPosition(arg2);
-				// TODO Auto-generated method stub
 				Intent intent = new Intent();
 
 				intent.putExtra("name", (String) map.get("name"));
