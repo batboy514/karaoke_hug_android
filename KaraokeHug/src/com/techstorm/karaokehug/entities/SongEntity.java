@@ -8,7 +8,7 @@ public class SongEntity {
 	private String author;
 	private String source;
 	private String quickSearch;
-	private boolean favourite;
+//	private boolean favourite;
 
 	public SongEntity() {
 		
@@ -19,8 +19,9 @@ public class SongEntity {
 		String lyric,
 		String author,
 		String source,
-		String quickSearch,
-		short favourite) {
+		String quickSearch
+//		short favourite
+		) {
 
 		this.songId = songId;
 		this.name = name;
@@ -28,7 +29,7 @@ public class SongEntity {
 		this.author = author;
 		this.source = source;
 		this.quickSearch = quickSearch;
-		this.favourite = (favourite == 1);
+//		this.favourite = (favourite == 1);
 	}
 
 	public int getSongId() {
@@ -79,12 +80,12 @@ public class SongEntity {
 		this.quickSearch = quickSearch;
 	}
 
-	public boolean isFavourite() {
-		return favourite;
-	}
-
-	public void setFavourite(boolean favourite) {
-		this.favourite = favourite;
-	}
+//	public boolean isFavourite() {
+//		return favourite;
+//	}
+//
+//	public void setFavourite(boolean favourite) {
+//		this.favourite = favourite;
+//	}
 	
 }

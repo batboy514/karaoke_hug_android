@@ -24,5 +24,6 @@
     <string name="categories_device">categories device</string>
     <string name="check_song">Can\'t find any song</string>
         <string name="no_data">No data</string>
-    
+            <string name="media">choose media player</string>
+        
 </resources>

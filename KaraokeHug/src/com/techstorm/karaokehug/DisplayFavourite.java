@@ -68,11 +68,11 @@ import android.widget.TextView;
 			
 			@Override
 			public void onClick(View v) {
-				String id = (String)v.getTag();
-				int value = Integer.parseInt(id);
-				DatabaseCreator.delFavourite(value);
-				FavouriteActivity favActivity =  (FavouriteActivity)mContext;
-				favActivity.displayDataALL();
+//				String id = (String)v.getTag();
+//				int value = Integer.parseInt(id);
+//				DatabaseCreator.delFavourite(value);
+//				FavouriteActivity favActivity =  (FavouriteActivity)mContext;
+//				favActivity.displayDataALL();
 			}
 		});
 		return arg1;

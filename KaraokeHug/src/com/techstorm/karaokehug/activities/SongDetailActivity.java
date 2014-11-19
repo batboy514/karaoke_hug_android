@@ -49,16 +49,14 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 
 			@Override
 			public void onClick(View v) {
-				if (song.isFavourite()) {
+				if (DatabaseCreator.isFavourite(song.getSongId())) {
 					btnfavorite.setImageBitmap(noLove);
-					DatabaseCreator.delFavourite(song.getSongId());
+					DatabaseCreator.delFavourite(song);
 				} else {
 					btnfavorite.setImageBitmap(love);
-					DatabaseCreator.addFavourite(song.getSongId());
+					DatabaseCreator.addFavourite(song);
 				}
-				song.setFavourite(!song.isFavourite());
-			}
-		});
+			}});
 		Button btn = (Button) findViewById(R.id.btn);
 		btn.setOnClickListener(this);
 	}

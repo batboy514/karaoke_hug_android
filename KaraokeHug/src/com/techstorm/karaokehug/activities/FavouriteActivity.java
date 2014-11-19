@@ -46,16 +46,13 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 	
 	
 	public void displayDataALL( ) {
-			
-		Boolean hasdata = DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
-		if (hasdata == false) {
-			TextView textdata = (TextView) findViewById(R.id.textdata);
-			textdata.setText(this.getApplicationContext().getString(R.string.no_data));
-		}
+		DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author); 	
+		
+		 DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
 		DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,user_id, user_name, user_lyric, user_author);
 					userlistfavourite.setAdapter(disadpt2);
-				
-	}
+		}
+	
 	
 	@Override
 	protected void onResume() {

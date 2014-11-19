@@ -21,12 +21,12 @@
             android:id="@+id/Spinner01"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinner"
             android:layout_alignParentRight="true"
             android:prompt="@string/spinner_title" />
 
-       
-
     </RelativeLayout>
+
  <com.google.android.gms.ads.AdView
             android:id="@+id/banner1"
             android:layout_width="match_parent"
@@ -35,6 +35,8 @@
             android:layout_marginTop="42dp"
             ads:adSize="BANNER"
 	        ads:adUnitId="ca-app-pub-7278887713829891/7737487560">
+
+
         </com.google.android.gms.ads.AdView>
 
     <ListView
@@ -42,11 +44,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="91dp"
+        android:cacheColorHint="#F8C79A"
         android:drawSelectorOnTop="true"
-        android:fastScrollAlwaysVisible="true"
+        android:fastScrollAlwaysVisible="false"
         android:fastScrollEnabled="true"
-        android:layoutMode="clipBounds"
-        android:overScrollMode="ifContentScrolls" >
+        android:layoutMode="opticalBounds"
+        android:listSelector="#FAF0E6"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbarStyle="insideOverlay"
+        android:smoothScrollbar="true" >
 
     </ListView>
 

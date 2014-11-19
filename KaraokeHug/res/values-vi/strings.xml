@@ -24,5 +24,6 @@
      <string name="select_languagesong">Chọn loại nhạc</string>
       <string name="check_song">Không tìm thấy bài hát</string>
          <string name="no_data">Không thấy dữ liệu</string>
-      
+       <string name="media">chọn loại đầu đĩa</string>
+        
 </resources>

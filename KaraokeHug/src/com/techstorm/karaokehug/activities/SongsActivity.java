@@ -43,12 +43,13 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
 	private Character abcSearch = 'A';
-	private Integer volSearch;
+	private Integer volSearch = 0;
 	private ListView userList;
 	private Context context;
 	int backButtonCount = 0;
 	Spinner spinner;
 	Spinner spinner1;
+
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
@@ -98,18 +99,11 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		super.onCreate(savedInstanceState);
 		context = this.getApplicationContext();
 		setContentView(R.layout.layout_songs);
+		showBanner(R.id.banner1);
 		userList = (ListView) findViewById(R.id.list1);
-
-		 spinner = (Spinner) findViewById(R.id.spinner);
-		 spinner1 = (Spinner) findViewById(R.id.Spinner01);
-
-		
+		spinner = (Spinner) findViewById(R.id.spinner);
+		spinner1 = (Spinner) findViewById(R.id.Spinner01);
 		updateData();
-		
-		
-		
-		
-
 		// Spinner click listener
 		spinner.setOnItemSelectedListener(this);
 		spinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -180,77 +174,83 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 
 	private void updateData() {
 		// Spinner Drop down elements
-		
-				Boolean hasdata	= DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categories);
-				if (hasdata) {
-					DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categories);
-					String item = categories.get(0).toString()
-							.replace(PREFIX_VOL_SEARCH, "");
-					volSearch = IntegerUtil.parseInt(item);
-				} else{
-				    categories.add(SettingActivity.itemproductselected);
-				    volSearch = null;
-				}
 
-				List<String> categories1 = new ArrayList<String>();
-				// categories1.add(ALL);
-				for (char character = 'A'; character < 'Z'; character++) {
-					categories1.add(String.valueOf(character));
+		Boolean hasdata = DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH,
+				categories);
+		if (hasdata) {
+			DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categories);
+			String item = categories.get(0).toString()
+					.replace(PREFIX_VOL_SEARCH, "");
+			volSearch = IntegerUtil.parseInt(item);
+		} else {
+			categories.add(SettingActivity.itemproductselected);
+			volSearch = null;
+		}
 
-				}
+		List<String> categories1 = new ArrayList<String>();
+		// categories1.add(ALL);
+		for (char character = 'A'; character < 'Z'; character++) {
+			categories1.add(String.valueOf(character));
 
-				// Creating adapter for spinner
-				ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-						android.R.layout.simple_spinner_item, categories);
-				ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
-						android.R.layout.simple_spinner_item, categories1);
-				
-				// Drop down layout style - list view with radio button
-				dataAdapter
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				dataAdapter1
-						.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		}
 
-				// attaching data adapter to spinner
-				spinner.setAdapter(dataAdapter);
-				spinner1.setAdapter(dataAdapter1);
+		// Creating adapter for spinner
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, categories);
+		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, categories1);
+
+		// Drop down layout style - list view with radio button
+		dataAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		dataAdapter1
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		// attaching data adapter to spinner
+		spinner.setAdapter(dataAdapter);
+		spinner1.setAdapter(dataAdapter1);
 	}
-	
+
 	public void displayDataEn() {
 		if (volSearch == null) {
-			 spinner = (Spinner) findViewById(R.id.spinner);
+			spinner = (Spinner) findViewById(R.id.spinner);
 			spinner.setOnItemSelectedListener(this);
-	        List<String> categories = new ArrayList<String>();
-	        categories.add("không có gì");
-			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			List<String> categories = new ArrayList<String>();
+			categories.add("không có gì");
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, categories);
+			dataAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner.setAdapter(dataAdapter);
-		}else{
-		DatabaseCreator.getSongDataEngLish(abcSearch, volSearch, user_name,
-				user_id, user_lyric, user_author);
-		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-				user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt);
+		} else {
+			DatabaseCreator.getSongDataEngLish(abcSearch, volSearch, user_name,
+					user_id, user_lyric, user_author);
+			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
+					user_name, user_lyric, user_author);
+			userList.setAdapter(disadpt);
+		}
 	}
-	}
+
 	public void displayDataVn() {
-		Boolean hasdata = DatabaseCreator.getSongDataVietNam(abcSearch, volSearch, user_name,
-				user_id, user_lyric, user_author);
+		Boolean hasdata = DatabaseCreator.getSongDataVietNam(abcSearch,
+				volSearch, user_name, user_id, user_lyric, user_author);
 		if (hasdata == false) {
-			 spinner = (Spinner) findViewById(R.id.spinner);
+			spinner = (Spinner) findViewById(R.id.spinner);
 			spinner.setOnItemSelectedListener(this);
-	        List<String> categories = new ArrayList<String>();
-	        categories.add("không có gì");
-			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			List<String> categories = new ArrayList<String>();
+			categories.add("không có gì");
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, categories);
+			dataAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinner.setAdapter(dataAdapter);
-		}else{
+		} else {
 			DatabaseCreator.getSongDataVietNam(abcSearch, volSearch, user_name,
 					user_id, user_lyric, user_author);
-		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-				user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt);
-	}
+			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
+					user_name, user_lyric, user_author);
+			userList.setAdapter(disadpt);
+		}
 	}
 
 	public void displayDataAll() {
@@ -267,7 +267,6 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	protected void onResume() {
 		super.onResume();
 		updateData();
-		
 		String choice = SettingActivity.itemselected;
 		if (choice == null) {
 			choice = this.getApplicationContext().getString(

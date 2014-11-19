@@ -17,7 +17,8 @@ import com.techstorm.karaokehug.entities.SongEntity;
 public class DatabaseCreator {
 
 	public static SQLiteDatabase database;
-
+	
+	
 	public static SQLiteDatabase openDatabase(Context context) {
 		DatabaseHelper myDbHelper = new DatabaseHelper(context);
 
@@ -47,13 +48,15 @@ public class DatabaseCreator {
 		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
 		String where = "Z_NAME like '" + productchoice + "'";
 		if (searchVol != null) {
-			where = "cast(ZROWID as text) like '" + searchVol + "%'";
+			where = "Z_NAME like '"
+					+ productchoice + "'";
 
 		} else {
 			String search = searchString.toLowerCase();
-			where = "  ZSNAMECLEAN like '" + search + "%' "
+			where = "  (ZSNAMECLEAN like '" + search + "%' "
 					+ "or ZSLYRICCLEAN like '" + search + "%' "
-					+ "or ZSABBR like '" + search + "%'";
+					+ "or ZSABBR like '" + search + "%') and Z_NAME like '"
+					+ productchoice + "'";
 		}
 
 		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
@@ -200,9 +203,10 @@ public class DatabaseCreator {
 	}
 
 	public static SongEntity getSongBySongId(int songId) {
-		String tableName = "ZSONG";
-		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA,ZSABBR,favourite";
-		String where = "ZROWID = " + songId;
+		String productchoice = SettingActivity.itemproductselected;
+		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
+		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA,ZSABBR";
+		String where = "ZROWID = " + songId + " and Z_NAME like '" + productchoice + "'";
 		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
 				select, where);
 		SongEntity song = null;
@@ -213,20 +217,29 @@ public class DatabaseCreator {
 					.getColumnIndex("ZSLYRIC")), mCursor2.getString(mCursor2
 					.getColumnIndex("ZSMETA")),
 					"Arirang 5 số (hầu hết các quán)",
-					mCursor2.getString(mCursor2.getColumnIndex("ZSABBR")),
-					mCursor2.getShort(mCursor2.getColumnIndex("favourite")));
+					mCursor2.getString(mCursor2.getColumnIndex("ZSABBR")));
 		}
 		return song;
+	}
+	
+	public static boolean isFavourite(int songId) {
+		String tableName = "ZFAVORITE";
+		String select = "*";
+		String where = "ZROWID = " + songId;
+		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
+				select, where);
+		if (mCursor2.moveToFirst()) {
+			return true;
+		}
+		return false;
 	}
 
 	public static Boolean getFavouriteData(ArrayList<String> user_name,
 			ArrayList<String> user_id, ArrayList<String> user_lyric,
 			ArrayList<String> user_author) {
-		String productchoice = SettingActivity.itemproductselected;
-		if (productchoice != null) {
-			String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
+			String tableName = " ZFAVORITE  ";
 			String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-			String where = "favourite = 1 and Z_NAME like '" + productchoice + "'";
+			String where = " 1 ";
 			;
 			Cursor mCursor = SqliteExecutor.queryStatement(database, tableName,
 					select, where);
@@ -244,20 +257,37 @@ public class DatabaseCreator {
 					user_author.add(mCursor.getString(mCursor
 							.getColumnIndex("ZSMETA")));
 				} while (mCursor.moveToNext());
-				mCursor.close();
 				return true;
+				
 			} 
 			mCursor.close();
-		}
-		
-		return false;
-
+			return false;
 	}
 
 	public static Boolean spinnerDataVol(String prefix, List<String> categories) {
 		String productchoice = SettingActivity.itemproductselected;
 		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
-		String select = " COUNT(ZSVOL),ZSVOL ";
+		String select = " ZSVOL ";
+		String where = "ZSVOL > 0 and Z_NAME like '" + productchoice + "'";
+		String groupby = " ZSVOL ";
+		String orderby = " ZSVOL DESC";
+		Cursor mCursor = SqliteExecutor.queryStatement(database, tableName,
+				select, where, groupby, orderby);
+		categories.clear();
+		if (mCursor.moveToFirst()) {
+			do {
+				categories.add(productchoice + " "
+						+ mCursor.getString(mCursor.getColumnIndex("ZSVOL")));
+
+			} while (mCursor.moveToNext());
+			return true;
+		}
+		return false;
+	}
+	public static Boolean spinnerDataVolDefault(String prefix, List<String> categories) {
+		String productchoice = SettingActivity.itemproductselected;
+		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
+		String select = " ZSVOL ";
 		String where = "ZSVOL > 0 and Z_NAME like '" + productchoice + "'";
 		String groupby = " ZSVOL ";
 		String orderby = " ZSVOL DESC";
@@ -293,19 +323,24 @@ public class DatabaseCreator {
 
 	}
 
-	public static void addFavourite(int value) {
-		String tableName = "ZSONG";
-		String setting = "favourite = 1";
-		String criterial = "ZROWID = " + value;
-		SqliteExecutor.updateStatement(database, tableName, setting, criterial);
+	public static void addFavourite(SongEntity song) {
+		int id = song.getSongId();
+		String name = song.getName();
+		String author = song.getAuthor();
+		String lyric = song.getLyric();
+		String quicksearch = song.getQuickSearch();
+		String tableName = "ZFAVORITE(ZROWID,ZSNAME,ZSLYRIC,ZSMETA,ZSABBR)";
+//		String values = "" + id + "," + name + "," + lyric 
+//				+ "," + author + "," + quicksearch;
+		SqliteExecutor.insertStatement(database, tableName, String.valueOf(id), name, lyric, author, quicksearch);
 
 	}
 
-	public static void delFavourite(int value) {
-		String tableName = "ZSONG";
-		String setting = "favourite = 0";
-		String criterial = "ZROWID = " + value;
-		SqliteExecutor.updateStatement(database, tableName, setting, criterial);
+	public static void delFavourite(SongEntity song) {
+		int id = song.getSongId();
+		String tableName = "ZFAVORITE";
+		String criterial = "ZROWID = " + id;
+		SqliteExecutor.deleteStatement(database, tableName, criterial);
 
 	}
 }
