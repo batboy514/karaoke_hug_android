@@ -46,17 +46,14 @@ public class DatabaseCreator {
 		String productchoice = SettingActivity.itemproductselected;
 		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
 		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-		String where = "Z_NAME like '" + productchoice + "'";
+		String where = "Z_NAME = '" + productchoice + "' ";
 		if (searchVol != null) {
-			where = "Z_NAME like '"
-					+ productchoice + "'";
-
+			where += " AND ZROWID = "+ String.valueOf(searchVol) + " ";
 		} else {
 			String search = searchString.toLowerCase();
-			where = "  (ZSNAMECLEAN like '" + search + "%' "
+			where += "  AND (ZSNAMECLEAN like '" + search + "%' "
 					+ "or ZSLYRICCLEAN like '" + search + "%' "
-					+ "or ZSABBR like '" + search + "%') and Z_NAME like '"
-					+ productchoice + "'";
+					+ "or ZSABBR like '" + search + "%')";
 		}
 
 		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
@@ -85,83 +82,6 @@ public class DatabaseCreator {
 		mCursor2.close();
 
 		return true;
-	}
-
-	public static Boolean getSongDataVietNam(Character abcSearch, Integer vol,
-			ArrayList<String> user_name, ArrayList<String> user_id,
-			ArrayList<String> user_lyric, ArrayList<String> user_author) {
-		String productchoice = SettingActivity.itemproductselected;
-		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT";
-		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-		String where = "ZSVOL <= " + vol
-				+ " and ZSLANGUAGE like 'vn' and Z_NAME like '" + productchoice
-				+ "'";
-
-		if (abcSearch != null) {
-			where += " AND ZSABBR like '" + abcSearch
-					+ "%' and ZSLANGUAGE like 'vn' and Z_NAME like '"
-					+ productchoice + "'";
-		}
-		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
-				select, where);
-		user_name.clear();
-		user_id.clear();
-		user_lyric.clear();
-		user_author.clear();
-		if (mCursor2.moveToFirst()) {
-			do {
-				user_id.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZROWID")));
-				user_name.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSNAME")));
-				user_lyric.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSLYRIC")));
-				user_author.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSMETA")));
-			} while (mCursor2.moveToNext());
-			mCursor2.close();
-			return true;
-		}
-		mCursor2.close();
-		return false;
-	}
-
-	public static Boolean getSongDataEngLish(Character abcSearch, Integer vol,
-			ArrayList<String> user_name, ArrayList<String> user_id,
-			ArrayList<String> user_lyric, ArrayList<String> user_author) {
-		String productchoice = SettingActivity.itemproductselected;
-		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
-		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-		String where = "ZSVOL <= " + vol
-				+ " and ZSLANGUAGE like 'en' and Z_NAME like '" + productchoice
-				+ "'";
-		if (abcSearch != null) {
-			where += " AND ZSABBR like '" + abcSearch
-					+ "%' and ZSLANGUAGE like 'en' and Z_NAME like '"
-					+ productchoice + "'";
-		}
-		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
-				select, where);
-		user_name.clear();
-		user_id.clear();
-		user_lyric.clear();
-		user_author.clear();
-		if (mCursor2.moveToFirst()) {
-			do {
-				user_id.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZROWID")));
-				user_name.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSNAME")));
-				user_lyric.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSLYRIC")));
-				user_author.add(mCursor2.getString(mCursor2
-						.getColumnIndex("ZSMETA")));
-			} while (mCursor2.moveToNext());
-			mCursor2.close();
-			return true;
-		}
-		mCursor2.close();
-		return false;
 	}
 
 	public static Boolean getSongDataAll(Character abcSearch, Integer vol, String languageCode,
