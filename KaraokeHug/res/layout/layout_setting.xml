@@ -43,4 +43,13 @@
         android:ellipsize="marquee"
         android:prompt="@string/select_languagesong" />
 
+    <Button
+        android:id="@+id/buttonrate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnersetting"
+        android:layout_marginTop="46dp"
+        android:drawableBottom="@drawable/rate"
+        android:text="Rate this app" />
+
 </RelativeLayout>
