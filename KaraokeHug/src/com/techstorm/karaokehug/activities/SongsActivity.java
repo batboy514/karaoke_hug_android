@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -49,6 +50,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	int backButtonCount = 0;
 	Spinner spinner;
 	Spinner spinner1;
+	private TextView textcheck;
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
@@ -80,6 +82,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		super.onCreate(savedInstanceState);
 		context = this.getApplicationContext();
 		setContentView(R.layout.layout_songs);
+		textcheck = (TextView) findViewById(R.id.Txt_check);
 		showBanner(R.id.banner1);
 		userList = (ListView) findViewById(R.id.list1);
 		spinner = (Spinner) findViewById(R.id.spinner);
@@ -181,11 +184,22 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		}
 		
 		
-		DatabaseCreator.getSongDataAll(abcSearch, volSearch, languageCode, user_name,
+		boolean hasData = DatabaseCreator.getSongDataAll(abcSearch, volSearch, languageCode, user_name,
 				user_id, user_lyric, user_author);
-		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-				user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt);
+		
+		if (hasData) {
+			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
+					user_name, user_lyric, user_author);
+			userList.setAdapter(disadpt);
+			userList.setVisibility(View.VISIBLE);
+			textcheck.setVisibility(View.GONE);
+		} else {
+			userList.setVisibility(View.GONE);
+			textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
+			textcheck.setVisibility(View.VISIBLE);
+		}
+		
+		
 
 	}
 
