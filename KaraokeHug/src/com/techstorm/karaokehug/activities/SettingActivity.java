@@ -42,10 +42,6 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerproduct.setAdapter(dataAdapter1);
 //		a = Integer.parseInt(itemproductselected);
-		Toast.makeText(
-				this,
-				itemproductselected,
-				Toast.LENGTH_SHORT).show();
 		for (String item : categories1) {
 			if (itemproductselected.equals(item)) {
 				spinnerproduct.setSelection(categories1.indexOf(item));
@@ -117,9 +113,9 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setMessage(this.getApplicationContext().getString(R.string.closing))
+	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -127,7 +123,7 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 	        }
 
 	    })
-	    .setNegativeButton("No", null)
+	    .setNegativeButton(this.getApplicationContext().getString(R.string.no), null)
 	    .show();
 	}
 }

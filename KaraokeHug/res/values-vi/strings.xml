@@ -26,5 +26,13 @@
     <string name="check_song">Không tìm thấy bài hát</string>
     <string name="no_data">Không thấy dữ liệu</string>
     <string name="media">Chọn loại đầu đĩa</string>
+    <string name="clo">Đóng ứng dụng KaraokeHug</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="closing ">Bạn muốn đóng ứng dụng KaraokeHug?</string>
+    <string name="rate">Đánh giá ứng dụng</string>
+    <string name="search_by_alphabet">Tìm kiếm theo chữ cái</string>
+    <string name="select_model">Bạn đang chọn</string>
+    <string name="choose">Bạn chưa chọn loại đầu dĩa</string>
 
 </resources>

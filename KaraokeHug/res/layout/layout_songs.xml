@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/spinner"
             android:layout_alignParentRight="true"
-            android:prompt="@string/spinner_title" />
+            android:prompt="@string/search_by_alphabet" />
 
     </RelativeLayout>
 
@@ -51,12 +51,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="91dp"
-        android:cacheColorHint="#F8C79A"
+        android:cacheColorHint="#F8C79ACC"
         android:drawSelectorOnTop="true"
         android:fastScrollAlwaysVisible="false"
         android:fastScrollEnabled="true"
         android:layoutMode="opticalBounds"
-        android:listSelector="#FAF0E6"
+        android:listSelector="#FAF0E6CC"
         android:overScrollMode="ifContentScrolls"
         android:scrollbarStyle="insideOverlay"
         android:smoothScrollbar="true" >

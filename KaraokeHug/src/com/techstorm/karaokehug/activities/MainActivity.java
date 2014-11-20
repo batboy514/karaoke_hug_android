@@ -37,15 +37,10 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		TabHost tabHost = getTabHost();
 		tabHost.setOnTabChangedListener(this);
 		SaveEntity saveEntity = DatabaseCreator.showMedia();
-		Toast.makeText(
-				this,
-				saveEntity.getMedia(),
-				Toast.LENGTH_SHORT).show();
+		
 		SettingActivity.itemproductselected = saveEntity.getMedia(); 
 				
 		SettingActivity.itemselected = saveEntity.getLanguage();
-	
-		String g ="";
     }
        
     private void setTabs()
@@ -82,9 +77,9 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setMessage(this.getApplicationContext().getString(R.string.closing))
+	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -92,7 +87,7 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 	        }
 
 	    })
-	    .setNegativeButton("No", null)
+	    .setNegativeButton(this.getApplicationContext().getString(R.string.no), null)
 	    .show();
 	}
 

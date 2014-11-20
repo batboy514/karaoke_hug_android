@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.techstorm.karaokehug.activities.FavouriteActivity;
+import com.techstorm.karaokehug.entities.SongEntity;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,11 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 @SuppressLint("InflateParams") public class DisplayFavourite extends BaseAdapter{
-	private Context mContext;
+	private final Context mContext;
 	private ArrayList<String> id;
 	private ArrayList<String> name;
 	private ArrayList<String> lyric;
 	private ArrayList<String> author;
+	private SongEntity song;
 
 	@Override
 	public int getCount() {
@@ -65,11 +69,11 @@ import android.widget.TextView;
 			
 			@Override
 			public void onClick(View v) {
-//				String id = (String)v.getTag();
-//				int value = Integer.parseInt(id);
-//				DatabaseCreator.delFavourite(value);
-//				FavouriteActivity favActivity =  (FavouriteActivity)mContext;
-//				favActivity.displayDataALL();
+				String id = (String)v.getTag();
+				int value = Integer.parseInt(id);
+				DatabaseCreator.delFavourite(value);
+				FavouriteActivity act = ((FavouriteActivity)mContext);
+				act.displayDataALL();
 			}
 		});
 		return arg1;

@@ -40,6 +40,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.layout_search);
 		textcheck = (TextView) findViewById(R.id.Txt_check);
 		ImageButton btnsearch = (ImageButton) findViewById(R.id.btnsearch);
+		String check = SettingActivity.itemproductselected;
+		
 		btnsearch.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -112,15 +114,26 @@ public class SearchActivity extends Activity implements OnClickListener {
 	}
 	
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		Toast.makeText(
+				this,
+				this.getApplicationContext().getString(R.string.select_model) + " " + SettingActivity.itemproductselected,
+				Toast.LENGTH_LONG).show();
+
+	}
+	
+	@Override
 	public void onClick(View v) {
 
 	}
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setMessage(this.getApplicationContext().getString(R.string.closing))
+	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -128,7 +141,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 	        }
 
 	    })
-	    .setNegativeButton("No", null)
+	    .setNegativeButton(this.getApplicationContext().getString(R.string.no), null)
 	    .show();
 	}
 

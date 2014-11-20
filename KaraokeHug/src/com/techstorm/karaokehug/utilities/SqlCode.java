@@ -7,3 +7,4 @@ public class SqlCode {
 	}
 	
 }
+// select * from song where s = 'I''m' 

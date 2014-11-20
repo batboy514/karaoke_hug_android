@@ -65,7 +65,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 						.replace(SettingActivity.itemselected + PREFIX_VOL_SEARCH, "");
 			}
 			volSearch = IntegerUtil.valueOf(item);
-		displayDataAll();
+		displayDataAll1();
 	}
 
 	public void onNothingSelected(AdapterView<?> arg0) {
@@ -98,12 +98,8 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				String abc = arg0.getItemAtPosition(arg2).toString();
-				String choice = SettingActivity.itemselected;
-				a = arg0.getItemAtPosition(arg2).toString();
-				if (choice == null) {
-					choice = context.getString(R.string.allsong_string);
-				}
-				displayDataAll();
+				abcSearch = abc.charAt(0);
+				displayDataAll1();
 			}
 
 			@Override
@@ -174,7 +170,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		spinner1.setAdapter(dataAdapter1);
 	}
 
-	public void displayDataAll() {
+	public void displayDataAll1() {
 		String choice = SettingActivity.itemselected;
 
 		String languageCode = null;
@@ -200,43 +196,24 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
 			textcheck.setVisibility(View.VISIBLE);
 		}
+		}
 		
-		
 
-	public void displayDataNumber() {
-
-		DatabaseCreator.getSongDataNumber(abcSearch, volSearch, user_name,
-				user_id, user_lyric, user_author);
-		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-				user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt);
-
-	}
-
-	public void displayDataAll() {
-
-		DatabaseCreator.getSongDataAll(abcSearch, volSearch, user_name,
-				user_id, user_lyric, user_author);
-		DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-				user_name, user_lyric, user_author);
-		userList.setAdapter(disadpt);
-
-	}
-
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
 		updateData();
-		displayDataAll();
+		displayDataAll1();
 
 	}
 
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setMessage(this.getApplicationContext().getString(R.string.closing))
+	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +221,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	        }
 
 	    })
-	    .setNegativeButton("No", null)
+	    .setNegativeButton(this.getApplicationContext().getString(R.string.no), null)
 	    .show();
 	}
 

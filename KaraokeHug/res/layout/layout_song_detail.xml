@@ -126,12 +126,11 @@
                 android:text="@string/source_label" />
 				
             <TextView
-                android:id="@+id/TextView08"
+                android:id="@+id/source"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:paddingLeft="8dp"
-                android:text="Arirang 5 số (hầu hết các quán Karaoke ở Việt Nam)-"
                 android:textColor="@android:color/black"
                 android:textColorHint="#00FFFF" />
             

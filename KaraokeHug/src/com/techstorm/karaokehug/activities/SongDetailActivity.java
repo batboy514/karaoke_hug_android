@@ -20,7 +20,7 @@ import com.techstorm.karaokehug.utilities.IntegerUtil;
 public class SongDetailActivity extends Activity implements View.OnClickListener {
 	
 	public static final String KEY_ROWID = "id";
-	private SongEntity song = null;
+	private SongEntity song ;
 	private Bitmap noLove, love;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 		TextView textlyric = (TextView) findViewById(R.id.textlyric);
 		TextView textauthor = (TextView) findViewById(R.id.textauthor);
 		TextView textquicksearch = (TextView) findViewById(R.id.textquicksearch);
-		
+		TextView textsource = (TextView) findViewById(R.id.source);
+		textsource.setText(SettingActivity.itemproductselected);
 		textname.setText(song.getName());
 		textid.setText(String.valueOf(song.getSongId()));
 		textlyric.setText(song.getLyric());
@@ -53,7 +54,7 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 			public void onClick(View v) {
 				if (DatabaseCreator.isFavourite(song.getSongId())) {
 					btnfavorite.setImageBitmap(noLove);
-					DatabaseCreator.delFavourite(song);
+					DatabaseCreator.delFavourite(song.getSongId());
 				} else {
 					btnfavorite.setImageBitmap(love);
 					DatabaseCreator.addFavourite(song);
@@ -67,21 +68,6 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 	public void onClick(View v) {
 		super.onBackPressed();
 	}
-	public void onBackPressed() {
-		 new AlertDialog.Builder(this)
-	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-	    {
-	        @Override
-	        public void onClick(DialogInterface dialog, int which) {
-	            finish();    
-	        }
-
-	    })
-	    .setNegativeButton("No", null)
-	    .show();
-	}
+	
 
 }

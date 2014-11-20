@@ -20,11 +20,11 @@ import com.techstorm.karaokehug.R;
 
 public class FavouriteActivity extends Activity implements OnItemSelectedListener{
 
-	 ListView userlistfavourite;
-	 private ArrayList<String> user_name = new ArrayList<String>();
-		private ArrayList<String> user_id = new ArrayList<String>();
-		private ArrayList<String> user_lyric = new ArrayList<String>();
-		private ArrayList<String> user_author = new ArrayList<String>();
+	 static ListView userlistfavourite;
+	public static ArrayList<String> user_name = new ArrayList<String>();
+	public static ArrayList<String> user_id = new ArrayList<String>();
+	public static ArrayList<String> user_lyric = new ArrayList<String>();
+	public static ArrayList<String> user_author = new ArrayList<String>();
 		int backButtonCount = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -79,9 +79,9 @@ intent.setClass(getApplicationContext(), SongDetailActivity.class);
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle("Closing Activity")
-	        .setMessage("Are you sure you want to close this activity?")
-	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setMessage(this.getApplicationContext().getString(R.string.closing))
+	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
 	        @Override
 	        public void onClick(DialogInterface dialog, int which) {
@@ -89,7 +89,7 @@ intent.setClass(getApplicationContext(), SongDetailActivity.class);
 	        }
 
 	    })
-	    .setNegativeButton("No", null)
+	    .setNegativeButton(this.getApplicationContext().getString(R.string.no), null)
 	    .show();
 	}
 }

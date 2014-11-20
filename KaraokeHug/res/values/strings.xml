@@ -26,5 +26,13 @@
     <string name="check_song">Can\'t find any song</string>
     <string name="no_data">Data not found</string>
     <string name="media">Choose media player</string>
+    <string name="clo">Closing KaraokeHug app</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="closing ">Are you sure you want to close KaraokeHug app?</string>
+    <string name="rate">Rate this app</string>
+    <string name="search_by_alphabet">Search by alphabet</string>
+    <string name="select_model">You are selecting</string>
+    <string name="choose">You are not choose any media player</string>
 
 </resources>

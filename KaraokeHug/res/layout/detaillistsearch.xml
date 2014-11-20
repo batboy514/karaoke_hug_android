@@ -91,7 +91,7 @@
         android:text="Đầu Karaoke" />
 
     <TextView
-        android:id="@+id/TextView08"
+        android:id="@+id/source"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignLeft="@+id/textlyric"
