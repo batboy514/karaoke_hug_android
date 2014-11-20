@@ -3,7 +3,9 @@ package com.techstorm.karaokehug.activities;
 
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -77,4 +79,21 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		
 		
 	}
+	public void onBackPressed() {
+		 new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Closing Activity")
+	        .setMessage("Are you sure you want to close this activity?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	    {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            finish();    
+	        }
+
+	    })
+	    .setNegativeButton("No", null)
+	    .show();
+	}
+
 }

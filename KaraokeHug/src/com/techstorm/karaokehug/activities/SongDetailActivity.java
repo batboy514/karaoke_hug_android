@@ -1,6 +1,8 @@
 package com.techstorm.karaokehug.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -64,6 +66,22 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 	@Override
 	public void onClick(View v) {
 		super.onBackPressed();
+	}
+	public void onBackPressed() {
+		 new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Closing Activity")
+	        .setMessage("Are you sure you want to close this activity?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	    {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            finish();    
+	        }
+
+	    })
+	    .setNegativeButton("No", null)
+	    .show();
 	}
 
 }

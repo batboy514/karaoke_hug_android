@@ -12,6 +12,8 @@ import com.techstorm.karaokehug.R.id;
 import com.techstorm.karaokehug.R.layout;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -119,25 +121,24 @@ public class SearchActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 
 	}
-	public void onBackPressed()
-	{
-	    if(backButtonCount >= 1)
+	public void onBackPressed() {
+		 new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Closing Activity")
+	        .setMessage("Are you sure you want to close this activity?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
 	    {
-	        Intent intent = new Intent(Intent.ACTION_MAIN);
-	        intent.addCategory(Intent.CATEGORY_HOME);
-	        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	        startActivity(intent);
-	    }
-	    else
-	    {
-	        Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
-	        backButtonCount++;
-	    }
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            finish();    
+	        }
+
+	    })
+	    .setNegativeButton("No", null)
+	    .show();
 	}
+
 	public void ShowMedia(){
-		
-	
-	
-	
 	}
+	
 }

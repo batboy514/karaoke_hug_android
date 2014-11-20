@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater.Filter;
@@ -132,7 +134,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 					} else {
 						abcSearch = abc.charAt(0);
 					}
-					displayDataVn();
+					displayDataAll();
 				}
 				if (choice.contains(context.getString(R.string.ensong_string))) {
 					if (ALL.equals(abc)) {
@@ -296,19 +298,22 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	}
 
 	public void onBackPressed() {
-		if (backButtonCount >= 1) {
-			Intent intent = new Intent(Intent.ACTION_MAIN);
-			intent.addCategory(Intent.CATEGORY_HOME);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-		} else {
-			Toast.makeText(
-					this,
-					"Press the back button once again to close the application.",
-					Toast.LENGTH_SHORT).show();
-			backButtonCount++;
-		}
+		 new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Closing Activity")
+	        .setMessage("Are you sure you want to close this activity?")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+	    {
+	        @Override
+	        public void onClick(DialogInterface dialog, int which) {
+	            finish();    
+	        }
+
+	    })
+	    .setNegativeButton("No", null)
+	    .show();
 	}
+
 
 	@Override
 	public void onScroll(AbsListView view, int firstVisibleItem,
