@@ -3,26 +3,20 @@ package com.techstorm.karaokehug.activities;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.DisplayFavourite;
-import com.techstorm.karaokehug.R;
-import com.techstorm.karaokehug.R.id;
-import com.techstorm.karaokehug.R.layout;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplayFavourite;
+import com.techstorm.karaokehug.R;
 
 public class FavouriteActivity extends Activity implements OnItemSelectedListener{
 

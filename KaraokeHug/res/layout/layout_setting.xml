@@ -10,17 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:gravity="center"
+        android:layout_marginTop="22dp"
+        android:gravity="left|bottom"
+        android:textColor="@color/appColor"
         android:text="@string/media"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spinnerproduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textdata"
-        android:layout_marginTop="14dp" />
+        android:layout_below="@+id/textdata" />
 
     <TextView
         android:id="@+id/TextView01"
@@ -29,9 +30,10 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/spinnerproduct"
         android:layout_marginTop="22dp"
-        android:gravity="center"
+        android:gravity="left|bottom"
+        android:textColor="@color/appColor"
         android:text="@string/select_languagesong"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spinnersetting"
@@ -39,7 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/TextView01"
-        android:layout_marginTop="24dp"
         android:ellipsize="marquee"
         android:prompt="@string/select_languagesong" />
 

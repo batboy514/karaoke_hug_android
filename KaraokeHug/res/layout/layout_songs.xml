@@ -39,6 +39,13 @@
 
         </com.google.android.gms.ads.AdView>
 
+ 	<TextView
+        android:id="@+id/Txt_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:textColor="@color/textColor" />
+ 
     <ListView
         android:id="@+id/list1"
         android:layout_width="match_parent"

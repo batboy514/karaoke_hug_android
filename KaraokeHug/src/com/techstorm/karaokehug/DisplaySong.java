@@ -3,7 +3,7 @@ package com.techstorm.karaokehug;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import com.techstorm.karaokehug.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;

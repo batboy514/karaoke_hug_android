@@ -3,19 +3,10 @@ package com.techstorm.karaokehug.activities;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.DisplaySong;
-import com.techstorm.karaokehug.R;
-import com.techstorm.karaokehug.R.id;
-import com.techstorm.karaokehug.R.layout;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,47 +18,52 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplaySong;
+import com.techstorm.karaokehug.R;
+
 public class SearchActivity extends Activity implements OnClickListener {
 	
-	private Integer searchVol;
+	private Integer searchId;
 	private String searchString;
 	private ArrayList<String> user_name = new ArrayList<String>();
 	private ArrayList<String> user_id = new ArrayList<String>();
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
 	int backButtonCount = 0;
-	TextView textcheck;
-	ListView userlistsearch;
+	private TextView textcheck;
+	private ListView userlistsearch;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_search);
-		
+		textcheck = (TextView) findViewById(R.id.Txt_check);
 		ImageButton btnsearch = (ImageButton) findViewById(R.id.btnsearch);
 		btnsearch.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				EditText textsearch = (EditText) findViewById(R.id.textsearch);
-				searchVol = null;
+				searchId = null;
 				searchString = null;
 				String k = textsearch.getText().toString();
 				if (k.matches("[0-9]+")) {
 					// mEditText only contains numbers
 					int value = Integer.parseInt(textsearch.getText()
 							.toString());
-					searchVol = value;
+					searchId = value;
 					
 				} else {
 					// mEditText contains number + text, or text only.
 					String kitu = textsearch.getText().toString();
 					searchString = kitu;
-					displayData();
 				}
-				displayData();
+				displayData(searchId, searchString);
 
 			}
 		});
-		final ListView userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
+		userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
 		userlistsearch.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -76,7 +72,6 @@ public class SearchActivity extends Activity implements OnClickListener {
 				// TODO Auto-generated method stub
 				Map<String, Object> map = (Map<String, Object>) userlistsearch
 						.getItemAtPosition(arg2);
-				// TODO Auto-generated method stub
 				Intent intent = new Intent();
 
 				intent.putExtra("name", (String) map.get("name"));
@@ -92,19 +87,18 @@ public class SearchActivity extends Activity implements OnClickListener {
 		showBanner(R.id.banner1);
 	}
 
-	private void displayData() {
-		boolean hasData = DatabaseCreator.getSearchData(searchVol, searchString, user_name, user_id, user_lyric, user_author);
-		if (hasData == false) {
-			 userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
-			  userlistsearch.setVisibility(View.GONE);
-			  textcheck = (TextView) findViewById(R.id.Txt_check);
-			textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
-		} else {
-		
-			 userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
+	private void displayData(Integer searchId, String searchString) {
+		boolean hasData = DatabaseCreator.getSearchData(searchId, searchString, user_name, user_id, user_lyric, user_author);
+		if (hasData) {
 			DisplaySong disadpt = new DisplaySong(SearchActivity.this, user_id,
 					user_name, user_lyric, user_author);
 			userlistsearch.setAdapter(disadpt);
+			userlistsearch.setVisibility(View.VISIBLE);
+			textcheck.setVisibility(View.GONE);
+		} else {
+			userlistsearch.setVisibility(View.GONE);
+			textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
+			textcheck.setVisibility(View.VISIBLE);
 		}
 	}
 
