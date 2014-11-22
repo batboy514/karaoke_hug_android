@@ -10,8 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -32,9 +34,16 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private ArrayList<String> user_id = new ArrayList<String>();
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
+	private ArrayList<String> user_name1 = new ArrayList<String>();
+	private ArrayList<String> user_lyric1 = new ArrayList<String>();
+	private ArrayList<String> user_author1 = new ArrayList<String>();
+	private ArrayList<String> user_id1 = new ArrayList<String>();
 	int backButtonCount = 0;
+	private Integer begin = 0;
+	private Integer count = 10;
 	private TextView textcheck;
 	private ListView userlistsearch;
+	private DisplaySong disadpt;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_search);
@@ -66,6 +75,34 @@ public class SearchActivity extends Activity implements OnClickListener {
 			}
 		});
 		userlistsearch = (ListView) findViewById(R.id.userlistfavourite);
+		userlistsearch.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
+				if ((firstVisibleItem + visibleItemCount) >= totalItemCount)
+				{
+			if (begin <= totalItemCount) {
+
+							begin += count;
+							
+
+							if (disadpt != null) {
+								disadpt.notifyDataSetChanged();
+							displayData(searchId, searchString);
+							}
+								
+						}
+				}
+			}
+		});
 		userlistsearch.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -90,10 +127,10 @@ public class SearchActivity extends Activity implements OnClickListener {
 	}
 
 	private void displayData(Integer searchId, String searchString) {
-		boolean hasData = DatabaseCreator.getSearchData(searchId, searchString, user_name, user_id, user_lyric, user_author);
+		boolean hasData = DatabaseCreator.getSearchData(begin, count, searchId, searchString, user_name, user_id, user_lyric, user_author);
 		if (hasData) {
-			DisplaySong disadpt = new DisplaySong(SearchActivity.this, user_id,
-					user_name, user_lyric, user_author);
+			DisplaySong disadpt = new DisplaySong(SearchActivity.this, user_id1,
+					user_name1, user_lyric1, user_author1);
 			userlistsearch.setAdapter(disadpt);
 			userlistsearch.setVisibility(View.VISIBLE);
 			textcheck.setVisibility(View.GONE);

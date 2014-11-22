@@ -43,6 +43,12 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	private ArrayList<String> user_lyric = new ArrayList<String>();
 	private ArrayList<String> user_author = new ArrayList<String>();
 	private ArrayList<String> user_id = new ArrayList<String>();
+	
+	private ArrayList<String> user_name1 = new ArrayList<String>();
+	private ArrayList<String> user_lyric1 = new ArrayList<String>();
+	private ArrayList<String> user_author1 = new ArrayList<String>();
+	private ArrayList<String> user_id1 = new ArrayList<String>();
+	
 	private List<String> categories = new ArrayList<String>();
 	ArrayList<String> list = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
@@ -54,18 +60,27 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	Spinner spinner;
 	Spinner spinner1;
 	private TextView textcheck;
+	private String previousVolSearch;
+	private String previousAbcSearch;
+	private DisplaySong disadpt;
+	private Integer beginlimit = 0;
+	private Integer countlimit = 10;
+	private int currentPos = 0;
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
 		// On selecting a spinner item
-
-			String item = null;
-			if (parent.getItemAtPosition(position) != null) {
-				item = parent.getItemAtPosition(position).toString()
-						.replace(SettingActivity.itemselected + PREFIX_VOL_SEARCH, "");
+		String item = parent.getItemAtPosition(position).toString();
+			
+			if (!previousVolSearch.equals(item)) {
+				if (parent.getItemAtPosition(position) != null) {
+					item = parent.getItemAtPosition(position).toString()
+							.replace(SettingActivity.itemselected + PREFIX_VOL_SEARCH, "");
+				}
+				volSearch = IntegerUtil.valueOf(item);
+				displayDataAll1();
 			}
-			volSearch = IntegerUtil.valueOf(item);
-		displayDataAll1();
+		
 	}
 
 	public void onNothingSelected(AdapterView<?> arg0) {
@@ -97,9 +112,22 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
+			if (!user_id1.isEmpty()) {
+				
 				String abc = arg0.getItemAtPosition(arg2).toString();
-				abcSearch = abc.charAt(0);
-				displayDataAll1();
+				if (!previousAbcSearch.equals(abc)) {
+					abcSearch = abc.charAt(0);
+					user_author1.clear();
+					user_id1.clear();
+					user_lyric1.clear();
+					user_name1.clear();
+					beginlimit = 0;
+					displayDataAll1();
+					disadpt.notifyDataSetChanged();
+					previousAbcSearch = abc;
+				}
+			}
+				
 			}
 
 			@Override
@@ -107,7 +135,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 
 			}
 		});
-
+		userList.setOnScrollListener(this);
 		userList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -158,7 +186,10 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 				android.R.layout.simple_spinner_item, categories);
 		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, categories1);
-
+		
+		previousVolSearch = categories.get(0);
+		previousAbcSearch = categories1.get(0);
+		
 		// Drop down layout style - list view with radio button
 		dataAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -182,24 +213,23 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		}
 		
 		
-		boolean hasData = DatabaseCreator.getSongDataAll(abcSearch, volSearch, languageCode, user_name,
-				user_id, user_lyric, user_author);
+		boolean hasData = DatabaseCreator.getSongDataAll(abcSearch, volSearch, beginlimit, countlimit, languageCode, user_name1,
+				user_id1, user_lyric1, user_author1);
 		
 		if (hasData) {
-			DisplaySong disadpt = new DisplaySong(SongsActivity.this, user_id,
-					user_name, user_lyric, user_author);
+			disadpt = new DisplaySong(SongsActivity.this, user_id1,
+					user_name1, user_lyric1, user_author1);
 			userList.setAdapter(disadpt);
 			userList.setVisibility(View.VISIBLE);
 			textcheck.setVisibility(View.GONE);
 		} else {
-			userList.setVisibility(View.GONE);
-			textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
-			textcheck.setVisibility(View.VISIBLE);
+			if (user_id1.isEmpty()) {
+				userList.setVisibility(View.GONE);
+				textcheck.setText(this.getApplicationContext().getString(R.string.check_song));
+				textcheck.setVisibility(View.VISIBLE);
+			}
 		}
 		}
-		
-
-	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -231,6 +261,19 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
 
+		if ((firstVisibleItem + visibleItemCount) >= totalItemCount)
+		{
+				if (beginlimit <= totalItemCount) {
+					displayDataAll1();
+					beginlimit += countlimit;
+					if (disadpt != null) {
+						disadpt.notifyDataSetChanged();
+						
+					}
+				}
+		}
+		
+	  
 	}
 
 	@Override

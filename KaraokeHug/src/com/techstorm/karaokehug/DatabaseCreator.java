@@ -19,7 +19,6 @@ public class DatabaseCreator {
 
 	public static SQLiteDatabase database;
 	
-	
 	public static SQLiteDatabase openDatabase(Context context) {
 		DatabaseHelper myDbHelper = new DatabaseHelper(context);
 
@@ -41,7 +40,7 @@ public class DatabaseCreator {
 	}
 
 	@SuppressLint("DefaultLocale")
-	public static Boolean getSearchData(Integer searchVol, String searchString,
+	public static Boolean getSearchData(Integer beginLimit, Integer countLimit, Integer searchVol, String searchString,
 			ArrayList<String> user_name, ArrayList<String> user_id,
 			ArrayList<String> user_lyric, ArrayList<String> user_author) {
 		String productchoice = SettingActivity.itemproductselected;
@@ -57,8 +56,7 @@ public class DatabaseCreator {
 					+ "or ZSABBR like '" + search + "%')";
 		}
 
-		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
-				select, where);
+		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName, select, where, beginLimit, countLimit);
 
 		user_name.clear();
 		user_id.clear();
@@ -84,8 +82,8 @@ public class DatabaseCreator {
 
 		return true;
 	}
-
-	public static Boolean getSongDataAll(Character abcSearch, Integer vol, String languageCode,
+	
+	public static Boolean getSongDataAll(Character abcSearch, Integer vol, Integer beginLimit, Integer countLimit, String languageCode,
 			ArrayList<String> user_name, ArrayList<String> user_id,
 			ArrayList<String> user_lyric, ArrayList<String> user_author) {
 		String productchoice = SettingActivity.itemproductselected;
@@ -100,7 +98,7 @@ public class DatabaseCreator {
 			where += " AND ZSVOL <= " + vol + " ";
 		}
 		if (abcSearch != null) {
-			if (abcSearch == '#') {
+		if (abcSearch == '#') {
 				where += " AND substr(ZSABBR,1,1) GLOB '[0-9]' and Z_NAME like '"
 						+ productchoice + "'";
 			} else {
@@ -109,11 +107,7 @@ public class DatabaseCreator {
 			}
 		}
 		Cursor mCursor2 = SqliteExecutor.queryStatement(database, tableName,
-				select, where);
-		user_name.clear();
-		user_id.clear();
-		user_lyric.clear();
-		user_author.clear();
+				select, where, beginLimit, countLimit);
 		if (mCursor2.moveToFirst()) {
 			do {
 				user_id.add(mCursor2.getString(mCursor2
