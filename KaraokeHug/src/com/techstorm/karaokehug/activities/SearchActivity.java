@@ -5,15 +5,18 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -54,7 +57,18 @@ public class SearchActivity extends Activity implements OnClickListener,
 
 			@Override
 			public void onClick(View v) {
+				if (!userId.isEmpty()) {
+				beginLimit=0;
+				userAuthor.clear();
+					userId.clear();
+					userName.clear();
+					userLyric.clear();
+					search();
+					disadpt.notifyDataSetChanged();
+				}else{
 				search();
+				}
+				hideKeyboard();
 			}
 		});
 		listviewSearch = (ListView) findViewById(R.id.userlistfavourite);
@@ -121,7 +135,6 @@ public class SearchActivity extends Activity implements OnClickListener,
 				this.getApplicationContext().getString(R.string.select_model)
 						+ " " + SettingActivity.itemProductSelecTed,
 				Toast.LENGTH_LONG).show();
-
 	}
 
 	private void search() {
@@ -131,10 +144,8 @@ public class SearchActivity extends Activity implements OnClickListener,
 		String k = textsearch.getText().toString();
 		if (k.matches("[0-9]+")) {
 			// mEditText only contains numbers
-			int value = Integer.parseInt(textsearch.getText()
-					.toString());
+			int value = Integer.parseInt(textsearch.getText().toString());
 			searchId = value;
-
 		} else {
 			// mEditText contains number + text, or text only.
 			String kitu = textsearch.getText().toString();
@@ -142,7 +153,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 		}
 		displayData(searchId, searchString);
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 
@@ -152,7 +163,8 @@ public class SearchActivity extends Activity implements OnClickListener,
 		new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setTitle(
-						this.getApplicationContext().getString(R.string.close))
+						this.getApplicationContext().getString(
+								R.string.closeapp))
 				.setMessage(
 						this.getApplicationContext()
 								.getString(R.string.closing))
@@ -185,7 +197,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 				beginLimit += COUNTLIMIT;
 				if (disadpt != null) {
 					disadpt.notifyDataSetChanged();
-					listviewSearch.setSelection(totalItemCount-COUNTLIMIT);
+					listviewSearch.setSelection(totalItemCount - COUNTLIMIT);
 				}
 
 			}
@@ -197,5 +209,12 @@ public class SearchActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 
 	}
-
+	private void hideKeyboard() {   
+	    // Check if no view has focus:
+	    View view = this.getCurrentFocus();
+	    if (view != null) {
+	        InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+	        inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+	    }
+	}
 }
