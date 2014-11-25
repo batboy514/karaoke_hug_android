@@ -47,7 +47,7 @@ public class SqliteExecutor {
 	}
 	
 	public static Cursor queryStatement(SQLiteDatabase database, String tableName, String select, String where, int beginLimit, int countLimit) {
-		return database.rawQuery("SELECT "+select+" FROM " + tableName + " WHERE " + where + " limit " + beginLimit +  "," + countLimit + ";", null);
+			return database.rawQuery("SELECT "+select+" FROM " + tableName + " WHERE " + where + " limit " + beginLimit +  "," + countLimit + ";", null);
 	}
 	
 	public static Cursor queryStatement(SQLiteDatabase database, String tableName, String select, String where, String groupby, String orderby) {

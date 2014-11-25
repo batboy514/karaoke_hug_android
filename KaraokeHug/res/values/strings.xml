@@ -26,7 +26,7 @@
     <string name="check_song">Can\'t find any song</string>
     <string name="no_data">Data not found</string>
     <string name="media">Choose media player</string>
-    <string name="clo">Closing KaraokeHug app</string>
+    <string name="closeapp">Closing KaraokeHug app</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="closing ">Are you sure you want to close KaraokeHug app?</string>

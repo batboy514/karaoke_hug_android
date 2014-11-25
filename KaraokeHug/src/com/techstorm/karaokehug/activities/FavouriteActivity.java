@@ -20,33 +20,33 @@ import com.techstorm.karaokehug.R;
 
 public class FavouriteActivity extends Activity implements OnItemSelectedListener{
 
-	 static ListView userlistfavourite;
-	public static ArrayList<String> user_name = new ArrayList<String>();
-	public static ArrayList<String> user_id = new ArrayList<String>();
-	public static ArrayList<String> user_lyric = new ArrayList<String>();
-	public static ArrayList<String> user_author = new ArrayList<String>();
+	 static ListView userlistFavourite;
+	public static ArrayList<String> userName = new ArrayList<String>();
+	public static ArrayList<String> userId = new ArrayList<String>();
+	public static ArrayList<String> userLyric = new ArrayList<String>();
+	public static ArrayList<String> userAuthor = new ArrayList<String>();
 		int backButtonCount = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_favourite);
-        userlistfavourite = (ListView) findViewById(R.id.userlistfavourite);
+        userlistFavourite = (ListView) findViewById(R.id.userlistfavourite);
        
     	displayDataALL();
-    	userlistfavourite.setClickable(true);
-    	userlistfavourite.setOnItemSelectedListener(this);
-    	userlistfavourite.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    	userlistFavourite.setClickable(true);
+    	userlistFavourite.setOnItemSelectedListener(this);
+    	userlistFavourite.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     	
         
 	}
 	
 	
 	public void displayDataALL( ) {
-		DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author); 	
+		DatabaseCreator.getFavouriteData(userName, userId, userLyric, userAuthor); 	
 		
-		 DatabaseCreator.getFavouriteData(user_name, user_id, user_lyric, user_author);
-		DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,user_id, user_name, user_lyric, user_author);
-					userlistfavourite.setAdapter(disadpt2);
+		 DatabaseCreator.getFavouriteData(userName, userId, userLyric, userAuthor);
+		DisplayFavourite disadpt2 = new DisplayFavourite(FavouriteActivity.this,userId, userName, userLyric, userAuthor);
+					userlistFavourite.setAdapter(disadpt2);
 		}
 	
 	
@@ -60,8 +60,8 @@ public class FavouriteActivity extends Activity implements OnItemSelectedListene
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
-		userlistfavourite = (ListView) findViewById(R.id.userlistfavourite);
-		Map<String, Object> map = (Map<String, Object>)userlistfavourite.getItemAtPosition(arg2);
+		userlistFavourite = (ListView) findViewById(R.id.userlistfavourite);
+		Map<String, Object> map = (Map<String, Object>)userlistFavourite.getItemAtPosition(arg2);
 		 Intent intent = new Intent();
 		 intent.putExtra("lyric", (String)map.get("lyric"));
 		 intent.putExtra("author", (String)map.get("author"));
@@ -79,7 +79,7 @@ intent.setClass(getApplicationContext(), SongDetailActivity.class);
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setTitle(this.getApplicationContext().getString(R.string.closeapp))
 	        .setMessage(this.getApplicationContext().getString(R.string.closing))
 	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {

@@ -24,28 +24,25 @@
             android:layout_alignBottom="@+id/spinner"
             android:layout_alignParentRight="true"
             android:prompt="@string/search_by_alphabet" />
-
     </RelativeLayout>
 
- <com.google.android.gms.ads.AdView
-            android:id="@+id/banner1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true" 
-            android:layout_marginTop="42dp"
-            ads:adSize="BANNER"
-	        ads:adUnitId="ca-app-pub-7278887713829891/7737487560">
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/banner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="42dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7278887713829891/7737487560" >
+    </com.google.android.gms.ads.AdView>
 
-
-        </com.google.android.gms.ads.AdView>
-
- 	<TextView
+    <TextView
         android:id="@+id/Txt_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:textColor="@color/textColor" />
- 
+
     <ListView
         android:id="@+id/list1"
         android:layout_width="match_parent"
@@ -57,10 +54,7 @@
         android:fastScrollEnabled="true"
         android:layoutMode="opticalBounds"
         android:listSelector="#FAF0E6CC"
-        android:overScrollMode="ifContentScrolls"
-        android:scrollbarStyle="insideOverlay"
-        android:smoothScrollbar="true" >
-
+        android:transcriptMode="alwaysScroll" >
     </ListView>
 
 </RelativeLayout>

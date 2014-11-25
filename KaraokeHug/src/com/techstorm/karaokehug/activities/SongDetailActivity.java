@@ -41,7 +41,7 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 		TextView textauthor = (TextView) findViewById(R.id.textauthor);
 		TextView textquicksearch = (TextView) findViewById(R.id.textquicksearch);
 		TextView textsource = (TextView) findViewById(R.id.source);
-		textsource.setText(SettingActivity.itemproductselected);
+		textsource.setText(SettingActivity.itemProductSelecTed);
 		textname.setText(song.getName());
 		textid.setText(String.valueOf(song.getSongId()));
 		textlyric.setText(song.getLyric());

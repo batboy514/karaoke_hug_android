@@ -58,15 +58,15 @@ public class SearchActivity extends Activity implements OnClickListener,
 			@Override
 			public void onClick(View v) {
 				if (!userId.isEmpty()) {
-				beginLimit=0;
-				userAuthor.clear();
+					beginLimit = 0;
+					userAuthor.clear();
 					userId.clear();
 					userName.clear();
 					userLyric.clear();
 					search();
 					disadpt.notifyDataSetChanged();
-				}else{
-				search();
+				} else {
+					search();
 				}
 				hideKeyboard();
 			}
@@ -99,9 +99,10 @@ public class SearchActivity extends Activity implements OnClickListener,
 	}
 
 	private void displayData(Integer searchId, String searchString) {
-		boolean hasData = DatabaseCreator
+			boolean hasData = DatabaseCreator
 				.getSearchData(beginLimit, COUNTLIMIT, searchId, searchString,
 						userName, userId, userLyric, userAuthor);
+			
 		if (hasData) {
 			disadpt = new DisplaySong(SearchActivity.this, userId, userName,
 					userLyric, userAuthor);
@@ -110,10 +111,14 @@ public class SearchActivity extends Activity implements OnClickListener,
 			listviewSearch.setVisibility(View.VISIBLE);
 			textCheck.setVisibility(View.GONE);
 		} else {
-			listviewSearch.setVisibility(View.GONE);
-			textCheck.setText(this.getApplicationContext().getString(
-					R.string.check_song));
-			textCheck.setVisibility(View.VISIBLE);
+			if (userAuthor.isEmpty()) {
+				disadpt.notifyDataSetChanged();
+			
+				listviewSearch.setVisibility(View.GONE);
+				textCheck.setText(this.getApplicationContext().getString(
+						R.string.check_song));
+				textCheck.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
@@ -130,12 +135,25 @@ public class SearchActivity extends Activity implements OnClickListener,
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		beginLimit = 0;
 		Toast.makeText(
 				this,
 				this.getApplicationContext().getString(R.string.select_model)
 						+ " " + SettingActivity.itemProductSelecTed,
 				Toast.LENGTH_LONG).show();
-	}
+	
+	
+			if (!userId.isEmpty()) {
+			
+				userAuthor.clear();
+				userId.clear();
+				userName.clear();
+				userLyric.clear();
+				search();
+				disadpt.notifyDataSetChanged();
+			}
+		}
+	
 
 	private void search() {
 		EditText textsearch = (EditText) findViewById(R.id.textsearch);
@@ -151,6 +169,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 			String kitu = textsearch.getText().toString();
 			searchString = kitu;
 		}
+
 		displayData(searchId, searchString);
 	}
 
@@ -190,9 +209,9 @@ public class SearchActivity extends Activity implements OnClickListener,
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 		// TODO Auto-generated method stub
-
+		int lastItem = firstVisibleItem + visibleItemCount;
 		if ((firstVisibleItem + visibleItemCount) == totalItemCount) {
-			if (beginLimit <= totalItemCount) {
+			if (beginLimit < totalItemCount) {
 				search();
 				beginLimit += COUNTLIMIT;
 				if (disadpt != null) {
@@ -201,7 +220,12 @@ public class SearchActivity extends Activity implements OnClickListener,
 				}
 
 			}
+			
+			
 		}
+			
+		
+		
 	}
 
 	@Override
@@ -209,12 +233,15 @@ public class SearchActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 
 	}
-	private void hideKeyboard() {   
-	    // Check if no view has focus:
-	    View view = this.getCurrentFocus();
-	    if (view != null) {
-	        InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-	        inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-	    }
+
+	private void hideKeyboard() {
+		// Check if no view has focus:
+		View view = this.getCurrentFocus();
+		if (view != null) {
+			InputMethodManager inputManager = (InputMethodManager) this
+					.getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputManager.hideSoftInputFromWindow(view.getWindowToken(),
+					InputMethodManager.HIDE_NOT_ALWAYS);
+		}
 	}
 }

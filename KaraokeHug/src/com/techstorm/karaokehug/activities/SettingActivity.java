@@ -20,37 +20,39 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.techstorm.karaokehug.DatabaseCreator;
+import com.techstorm.karaokehug.DisplaySong;
 import com.techstorm.karaokehug.R;
 import com.techstorm.karaokehug.entities.SaveEntity;
 
 public class SettingActivity extends Activity implements OnItemSelectedListener {
-	Spinner spinner;
-	TextView text1;
-	int backButtonCount = 0;
-	int a;
-	public static String itemselected;
-	public static String itemproductselected;
+	Spinner SPINNERLANGUAGE;
+	TextView TEXT;
+	int BACKBUTTONCOUNT = 0;
+	int A;
+	public static String itemSelecTed;
+	private DisplaySong Disadpt;
+	public static String itemProductSelecTed;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_setting);
-		Spinner spinnerproduct = (Spinner) findViewById(R.id.spinnerproduct);
+		Spinner spinnerProDuct = (Spinner) findViewById(R.id.spinnerproduct);
 		List<String> categories1 = new ArrayList<String>();
 		DatabaseCreator.spinnerDataProduct(categories1);
 		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, categories1);
 		dataAdapter1
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerproduct.setAdapter(dataAdapter1);
+		spinnerProDuct.setAdapter(dataAdapter1);
 //		a = Integer.parseInt(itemproductselected);
 		for (String item : categories1) {
-			if (itemproductselected.equals(item)) {
-				spinnerproduct.setSelection(categories1.indexOf(item));
+			if (itemProductSelecTed.equals(item)) {
+				spinnerProDuct.setSelection(categories1.indexOf(item));
 				break;
 			}
 		}
 
-		Button btn = (Button) findViewById(R.id.buttonrate);
-		btn.setOnClickListener(new OnClickListener() {
+		Button btnRate = (Button) findViewById(R.id.buttonrate);
+		btnRate.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -61,18 +63,18 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 			}
 		});
 				
-		spinnerproduct.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinnerProDuct.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				itemproductselected = arg0.getItemAtPosition(arg2).toString();
+				itemProductSelecTed = arg0.getItemAtPosition(arg2).toString();
 				DatabaseCreator.saveMedia();
 				SaveEntity saveEntity = DatabaseCreator.showMedia();
-				SettingActivity.itemproductselected = saveEntity.getMedia(); 
+				SettingActivity.itemProductSelecTed = saveEntity.getMedia(); 
 						
-				SettingActivity.itemselected = saveEntity.getLanguage();
+				SettingActivity.itemSelecTed = saveEntity.getLanguage();
 			}
 
 			@Override
@@ -81,8 +83,8 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 				
 			}
 		});
-		spinner = (Spinner) findViewById(R.id.spinnersetting);
-		spinner.setOnItemSelectedListener(this);
+		SPINNERLANGUAGE = (Spinner) findViewById(R.id.spinnersetting);
+		SPINNERLANGUAGE.setOnItemSelectedListener(this);
 		List<String> categories = new ArrayList<String>();
 		categories.add(this.getApplicationContext().getString(
 				R.string.allsong_string));
@@ -94,14 +96,13 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 				android.R.layout.simple_spinner_item, categories);
 		dataAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(dataAdapter);
+		SPINNERLANGUAGE.setAdapter(dataAdapter);
 	}
 	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View arg0, int arg2,
 			long arg3) {
-		itemselected = parent.getItemAtPosition(arg2).toString();
-		
+		itemSelecTed = parent.getItemAtPosition(arg2).toString();
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setTitle(this.getApplicationContext().getString(R.string.closeapp))
 	        .setMessage(this.getApplicationContext().getString(R.string.closing))
 	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {

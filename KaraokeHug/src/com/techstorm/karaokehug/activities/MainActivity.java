@@ -26,9 +26,9 @@ import com.techstorm.karaokehug.entities.SaveEntity;
 public class MainActivity extends TabActivity implements OnTabChangeListener {
 	
 	ArrayList<String> list = new ArrayList<String>();
-	ArrayAdapter<String> adapter, listadapter;
-	private ArrayList<String> media1 = new ArrayList<String>();
-	private ArrayList<String> language = new ArrayList<String>();
+	ArrayAdapter<String> aDapTer, listAdapter;
+	private ArrayList<String> meDia = new ArrayList<String>();
+	private ArrayList<String> lanGuaGe = new ArrayList<String>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,9 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		tabHost.setOnTabChangedListener(this);
 		SaveEntity saveEntity = DatabaseCreator.showMedia();
 		
-		SettingActivity.itemproductselected = saveEntity.getMedia(); 
+		SettingActivity.itemProductSelecTed = saveEntity.getMedia(); 
 				
-		SettingActivity.itemselected = saveEntity.getLanguage();
+		SettingActivity.itemSelecTed = saveEntity.getLanguage();
     }
        
     private void setTabs()
@@ -77,7 +77,7 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 	public void onBackPressed() {
 		 new AlertDialog.Builder(this)
 	        .setIcon(android.R.drawable.ic_dialog_alert)
-	        .setTitle(this.getApplicationContext().getString(R.string.clo))
+	        .setTitle(this.getApplicationContext().getString(R.string.closeapp))
 	        .setMessage(this.getApplicationContext().getString(R.string.closing))
 	        .setPositiveButton(this.getApplicationContext().getString(R.string.yes), new DialogInterface.OnClickListener()
 	    {
