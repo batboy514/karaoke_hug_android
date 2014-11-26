@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater.Filter;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -21,13 +20,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.DisplaySong;
-import com.techstorm.karaokehug.R;
 import com.techstorm.karaokehug.utilities.IntegerUtil;
 
 /**
@@ -46,7 +44,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	public static ArrayList<String> userAuthor = new ArrayList<String>();
 	public static ArrayList<String> userId = new ArrayList<String>();
 
-	private List<String> categories = new ArrayList<String>();
+	private List<String> categoriesVol = new ArrayList<String>();
 	ArrayAdapter<String> adapter, listadapter;
 	private Character abcSearch = '#';
 	private Integer volSearch = 0;
@@ -54,16 +52,15 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	private Context context;
 	int backButtonCount = 0;
 	Spinner spinnerVolSearch;
-	Spinner spinnerABCsearch;
+	Spinner spinnerAbcSearch;
 	private TextView textCheck;
 	public static String previousVolSearch;
 	private String previousAbcSearch;
 	public static DisplaySong disadpt;
-	private Integer BEGINLIMIT = 0;
+	private Integer beginLimit = 0;
 	private Integer COUNTLIMIT = 10;
-	private int currentPos = 0;
 	private ArrayAdapter<String> dataAdapterVol;
-	private ArrayAdapter<String> dataAdapterABC;
+	private ArrayAdapter<String> dataAdapterAbc;
 	private int positionVol = 0;
 	private int positionABC = 0;
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
@@ -85,7 +82,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			userId.clear();
 			userLyric.clear();
 			userName.clear();
-			BEGINLIMIT = 0;
+			beginLimit = 0;
 			displayDataAll1();
 			disadpt.notifyDataSetChanged();
 		}
@@ -113,11 +110,11 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		showBanner(R.id.banner1);
 		listviewSong = (ListView) findViewById(R.id.list1);
 		spinnerVolSearch = (Spinner) findViewById(R.id.spinner);
-		spinnerABCsearch = (Spinner) findViewById(R.id.Spinner01);
+		spinnerAbcSearch = (Spinner) findViewById(R.id.Spinner01);
 		updateData();
 		// Spinner click listener
 		spinnerVolSearch.setOnItemSelectedListener(this);
-		spinnerABCsearch.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinnerAbcSearch.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
@@ -130,7 +127,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 						userId.clear();
 						userLyric.clear();
 						userName.clear();
-						BEGINLIMIT = 0;
+						beginLimit = 0;
 						displayDataAll1();
 						disadpt.notifyDataSetChanged();
 						previousAbcSearch = abc;
@@ -143,7 +140,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 						userId.clear();
 						userLyric.clear();
 						userName.clear();
-						BEGINLIMIT = 0;
+						beginLimit = 0;
 						displayDataAll1();
 						previousAbcSearch = abc;
 					}
@@ -183,41 +180,41 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		// Spinner Drop down elements
 
 		Boolean hasdata = DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH,
-				categories);
+				categoriesVol);
 		if (hasdata) {
-			DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categories);
-			String item = categories.get(0).toString()
+			DatabaseCreator.spinnerDataVol(PREFIX_VOL_SEARCH, categoriesVol);
+			String item = categoriesVol.get(0).toString()
 					.replace(PREFIX_VOL_SEARCH, "");
 			volSearch = IntegerUtil.parseInt(item);
 		} else {
-			categories.add(SettingActivity.itemProductSelecTed);
+			categoriesVol.add(SettingActivity.itemProductSelecTed);
 			volSearch = null;
 		}
 
-		List<String> categories1 = new ArrayList<String>();
+		List<String> categoriesAbc = new ArrayList<String>();
 		// categories1.add(ALL);
-		categories1.add("#");
+		categoriesAbc.add("#");
 		for (char character = 'A'; character < 'Z'; character++) {
-			categories1.add(String.valueOf(character));
+			categoriesAbc.add(String.valueOf(character));
 		}
 
 		// Creating adapter for spinner
 		dataAdapterVol = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, categories);
-		dataAdapterABC = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, categories1);
+				android.R.layout.simple_spinner_item, categoriesVol);
+		dataAdapterAbc = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, categoriesAbc);
 
 		
 		if (previousVolSearch == null) {
-			previousVolSearch = categories.get(0);
+			previousVolSearch = categoriesVol.get(0);
 		}
 		if (previousAbcSearch == null) {
-			previousAbcSearch = categories1.get(0);
+			previousAbcSearch = categoriesAbc.get(0);
 		}
 		
 		
 		Object selectedVolItem = spinnerVolSearch.getItemAtPosition(positionVol);
-		Object selectedAbcItem = spinnerABCsearch.getItemAtPosition(positionABC);
+		Object selectedAbcItem = spinnerAbcSearch.getItemAtPosition(positionABC);
 		if (selectedVolItem != null && selectedAbcItem != null && (
 				!previousVolSearch.equals(selectedVolItem.toString())
 				|| !previousAbcSearch.equals(selectedAbcItem.toString()))) {
@@ -225,7 +222,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			userId.clear();
 			userLyric.clear();
 			userName.clear();
-			BEGINLIMIT = 0;
+			beginLimit = 0;
 			displayDataAll1();
 			disadpt.notifyDataSetChanged();
 		}
@@ -234,12 +231,12 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		// Drop down layout style - list view with radio button
 		dataAdapterVol
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		dataAdapterABC
+		dataAdapterAbc
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		// attaching data adapter to spinner
 		spinnerVolSearch.setAdapter(dataAdapterVol);
-		spinnerABCsearch.setAdapter(dataAdapterABC);
+		spinnerAbcSearch.setAdapter(dataAdapterAbc);
 	}
 
 	public void displayDataAll1() {
@@ -253,7 +250,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 			languageCode = LANGUAGE_CODE_EN;
 		}
 		boolean hasData = DatabaseCreator.getSongDataAll(abcSearch, volSearch,
-				BEGINLIMIT, COUNTLIMIT, languageCode, userName, userId,
+				beginLimit, COUNTLIMIT, languageCode, userName, userId,
 				userLyric, userAuthor);
 
 		if (hasData) {
@@ -277,7 +274,7 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 	protected void onResume() {
 		super.onResume();
 		
-		BEGINLIMIT = 0;
+		beginLimit = 0;
 		if (!userId.isEmpty()) {
 			userAuthor.clear();
 			userId.clear();
@@ -324,9 +321,9 @@ public class SongsActivity extends Activity implements OnItemSelectedListener,
 		// TODO Auto-generated method stub
 
 		if ((firstVisibleItem + visibleItemCount) >= totalItemCount) {
-			if (BEGINLIMIT <= totalItemCount) {
+			if (beginLimit <= totalItemCount) {
 				displayDataAll1();
-				BEGINLIMIT += COUNTLIMIT;
+				beginLimit += COUNTLIMIT;
 				if (disadpt != null) {
 					disadpt.notifyDataSetChanged();
 					listviewSong.setSelection(totalItemCount - COUNTLIMIT);

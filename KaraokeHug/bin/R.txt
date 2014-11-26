@@ -237,7 +237,7 @@ int string back_label 0x7f060033
 int string categories_device 0x7f060035
 int string check_song 0x7f060036
 int string choose 0x7f060040
-int string clo 0x7f060039
+int string closeapp 0x7f060039
 int string closing  0x7f06003c
 int string common_google_play_services_enable_button 0x7f060011
 int string common_google_play_services_enable_text 0x7f060010

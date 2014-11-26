@@ -15,10 +15,9 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.R;
 import com.techstorm.karaokehug.entities.SaveEntity;
 
 

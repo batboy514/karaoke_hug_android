@@ -1,8 +1,6 @@
 package com.techstorm.karaokehug.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,8 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.DatabaseCreator;
-import com.techstorm.karaokehug.R;
 import com.techstorm.karaokehug.entities.SongEntity;
 import com.techstorm.karaokehug.utilities.IntegerUtil;
 

@@ -17,11 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.DisplaySong;
-import com.techstorm.karaokehug.R;
 import com.techstorm.karaokehug.entities.SaveEntity;
 
 public class SettingActivity extends Activity implements OnItemSelectedListener {
@@ -58,7 +57,7 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(Intent.ACTION_VIEW);
-				  intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.techstorm.karaokehug"));
+				  intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.techstorm.karaoke_hug"));
 				  startActivity(intent);
 			}
 		});

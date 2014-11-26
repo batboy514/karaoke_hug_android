@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String KEY_FNAME="fname";
 	//The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/com.techstorm.karaokehug/databases/";
+    private static String DB_PATH = "/data/data/com.techstorm.karaoke_hug/databases/";
  
     private static String DB_NAME = "KaraokeVietam3.sqlite";
  

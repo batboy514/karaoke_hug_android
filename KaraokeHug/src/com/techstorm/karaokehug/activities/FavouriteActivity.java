@@ -12,11 +12,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.DatabaseCreator;
 import com.techstorm.karaokehug.DisplayFavourite;
-import com.techstorm.karaokehug.R;
 
 public class FavouriteActivity extends Activity implements OnItemSelectedListener{
 

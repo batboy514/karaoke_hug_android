@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.techstorm.karaoke_hug.R;
+
 @SuppressLint("InflateParams")
 public class DisplaySong extends BaseAdapter {
 	private Context mContext;

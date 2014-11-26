@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.techstorm.karaokehug.activities.FavouriteActivity;
-import com.techstorm.karaokehug.entities.SongEntity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.techstorm.karaoke_hug.R;
+import com.techstorm.karaokehug.activities.FavouriteActivity;
+import com.techstorm.karaokehug.entities.SongEntity;
 
 @SuppressLint("InflateParams") public class DisplayFavourite extends BaseAdapter{
 	private final Context mContext;
