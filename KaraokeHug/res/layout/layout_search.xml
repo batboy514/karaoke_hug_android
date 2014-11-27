@@ -39,7 +39,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="40dp"
 	        ads:adSize="BANNER"
-	        ads:adUnitId="ca-app-pub-7278887713829891/7424273163" />
+	        ads:adUnitId="ca-app-pub-3572142601452910/2077759981" />
     
     <ListView
         android:id="@+id/userlistfavourite"
