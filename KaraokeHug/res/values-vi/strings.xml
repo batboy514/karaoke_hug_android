@@ -18,8 +18,8 @@
     <string name="song_id_label">Mã số</string>
     <string name="quick_search_label">Tìm kiếm nhanh</string>
     <string name="back_label">Trở lại</string>
-    <string name="ensong_string">Nhạc Ngoại</string>
-    <string name="vnsong_string">Nhạc Việt</string>
+    <string name="ensong_string">English</string>
+    <string name="vnsong_string">Việt Nam</string>
     <string name="allsong_string">Tất cả</string>
     <string name="categories_device">Danh mục thiết bị</string>
     <string name="select_languagesong">Chọn loại nhạc</string>

@@ -6,8 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="spinner_title">Select Category</string>
     <string name="empty_string">-</string>
-    <string name="ensong_string">English Song</string>
-    <string name="vnsong_string">VietNam Song</string>
+    <string name="ensong_string">English</string>
+    <string name="vnsong_string">Việt Nam</string>
     <string name="allsong_string">All Song</string>
     <string name="search_string">Search</string>
     <string name="favourite_string">Favourites</string>

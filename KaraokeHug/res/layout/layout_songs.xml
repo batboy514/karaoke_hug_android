@@ -49,7 +49,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="91dp"
         android:cacheColorHint="#F8C79ACC"
-        android:drawSelectorOnTop="true"
+        android:drawSelectorOnTop="false"
         android:fastScrollAlwaysVisible="false"
         android:fastScrollEnabled="true"
         android:layoutMode="opticalBounds"

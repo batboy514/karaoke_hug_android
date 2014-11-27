@@ -24,28 +24,26 @@ import com.techstorm.karaokehug.DisplaySong;
 import com.techstorm.karaokehug.entities.SaveEntity;
 
 public class SettingActivity extends Activity implements OnItemSelectedListener {
-	Spinner SPINNERLANGUAGE;
+	private Spinner spinnerLanguage;
 	TextView TEXT;
-	int BACKBUTTONCOUNT = 0;
+	int backButtonCount = 0;
 	int A;
-	public static String itemSelecTed;
-	private DisplaySong Disadpt;
-	public static String itemProductSelecTed;
+	public static String itemSelected;
+	public static String itemProductSelected;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_setting);
 		Spinner spinnerProDuct = (Spinner) findViewById(R.id.spinnerproduct);
-		List<String> categories1 = new ArrayList<String>();
-		DatabaseCreator.spinnerDataProduct(categories1);
-		ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, categories1);
-		dataAdapter1
+		List<String> categoriesProduct = new ArrayList<String>();
+		DatabaseCreator.spinnerDataProduct(categoriesProduct);
+		ArrayAdapter<String> dataAdapterProduct = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, categoriesProduct);
+		dataAdapterProduct
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerProDuct.setAdapter(dataAdapter1);
-//		a = Integer.parseInt(itemproductselected);
-		for (String item : categories1) {
-			if (itemProductSelecTed.equals(item)) {
-				spinnerProDuct.setSelection(categories1.indexOf(item));
+		spinnerProDuct.setAdapter(dataAdapterProduct);
+		for (String item : categoriesProduct) {
+			if (itemProductSelected.equals(item)) {
+				spinnerProDuct.setSelection(categoriesProduct.indexOf(item));
 				break;
 			}
 		}
@@ -55,7 +53,6 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				  intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.techstorm.karaoke_hug"));
 				  startActivity(intent);
@@ -68,12 +65,12 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				itemProductSelecTed = arg0.getItemAtPosition(arg2).toString();
+				itemProductSelected = arg0.getItemAtPosition(arg2).toString();
 				DatabaseCreator.saveMedia();
 				SaveEntity saveEntity = DatabaseCreator.showMedia();
-				SettingActivity.itemProductSelecTed = saveEntity.getMedia(); 
+				SettingActivity.itemProductSelected = saveEntity.getMedia(); 
 						
-				SettingActivity.itemSelecTed = saveEntity.getLanguage();
+				SettingActivity.itemSelected = saveEntity.getLanguage();
 			}
 
 			@Override
@@ -82,26 +79,34 @@ public class SettingActivity extends Activity implements OnItemSelectedListener 
 				
 			}
 		});
-		SPINNERLANGUAGE = (Spinner) findViewById(R.id.spinnersetting);
-		SPINNERLANGUAGE.setOnItemSelectedListener(this);
-		List<String> categories = new ArrayList<String>();
-		categories.add(this.getApplicationContext().getString(
-				R.string.allsong_string));
-		categories.add(this.getApplicationContext().getString(
+		spinnerLanguage = (Spinner) findViewById(R.id.spinnersetting);
+		spinnerLanguage.setOnItemSelectedListener(this);
+		List<String> categoriesLanguage = new ArrayList<String>();
+		categoriesLanguage.add(this.getApplicationContext().getString(
 				R.string.vnsong_string));
-		categories.add(this.getApplicationContext().getString(
+		categoriesLanguage.add(this.getApplicationContext().getString(
 				R.string.ensong_string));
+		categoriesLanguage.add(this.getApplicationContext().getString(
+				R.string.allsong_string));
+		
+		for (String item : categoriesLanguage) {
+			if (itemSelected.equals(item)) {
+				spinnerLanguage.setSelection(categoriesLanguage.indexOf(item));
+				break;
+			}
+		}
+		
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, categories);
+				android.R.layout.simple_spinner_item, categoriesLanguage);
 		dataAdapter
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		SPINNERLANGUAGE.setAdapter(dataAdapter);
+		spinnerLanguage.setAdapter(dataAdapter);
 	}
 	
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View arg0, int arg2,
 			long arg3) {
-		itemSelecTed = parent.getItemAtPosition(arg2).toString();
+		itemSelected = parent.getItemAtPosition(arg2).toString();
 	}
 
 	@Override

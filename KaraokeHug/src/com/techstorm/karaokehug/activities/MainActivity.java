@@ -37,9 +37,9 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 		tabHost.setOnTabChangedListener(this);
 		SaveEntity saveEntity = DatabaseCreator.showMedia();
 		
-		SettingActivity.itemProductSelecTed = saveEntity.getMedia(); 
+		SettingActivity.itemProductSelected = saveEntity.getMedia(); 
 				
-		SettingActivity.itemSelecTed = saveEntity.getLanguage();
+		SettingActivity.itemSelected = saveEntity.getLanguage();
     }
        
     private void setTabs()
@@ -69,8 +69,7 @@ public class MainActivity extends TabActivity implements OnTabChangeListener {
 
 	@Override
 	public void onTabChanged(String arg0) {
-		// TODO Auto-generated method stub
-		
+		//empty
 		
 	}
 	public void onBackPressed() {

@@ -50,7 +50,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 		setContentView(R.layout.layout_search);
 		textCheck = (TextView) findViewById(R.id.Txt_check);
 		ImageButton btnsearch = (ImageButton) findViewById(R.id.btnsearch);
-		String CHECK = SettingActivity.itemProductSelecTed;
+		String CHECK = SettingActivity.itemProductSelected;
 
 		btnsearch.setOnClickListener(new View.OnClickListener() {
 
@@ -138,7 +138,7 @@ public class SearchActivity extends Activity implements OnClickListener,
 		Toast.makeText(
 				this,
 				this.getApplicationContext().getString(R.string.select_model)
-						+ " " + SettingActivity.itemProductSelecTed,
+						+ " " + SettingActivity.itemProductSelected,
 				Toast.LENGTH_LONG).show();
 	
 	
