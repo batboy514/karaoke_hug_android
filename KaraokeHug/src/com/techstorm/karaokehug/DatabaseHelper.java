@@ -10,7 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-
+//jaooahdhdpashdslhsad
 public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String KEY_FNAME="fname";
 	//The Android's default system path of your application database.
