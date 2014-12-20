@@ -24,10 +24,10 @@ import com.techstorm.karaokehug.entities.SongEntity;
 	private ArrayList<String> name;
 	private ArrayList<String> lyric;
 	private ArrayList<String> author;
-	private SongEntity song;      
+	private SongEntity song;
 
 	@Override
-	public int      getCount() {
+	public int getCount() {
 		return id.size();
 	}
 
