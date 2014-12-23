@@ -10,12 +10,16 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.techstorm.karaoke_hug.R;
 import com.techstorm.karaokehug.activities.SettingActivity;
 import com.techstorm.karaokehug.entities.SaveEntity;
 import com.techstorm.karaokehug.entities.SongEntity;
 import com.techstorm.karaokehug.utilities.SqlCode;
 
 public class DatabaseCreator {
+	private static final String ALL = "All";
+	private static final String LANGUAGE_CODE_VN = "vn";
+	private static final String LANGUAGE_CODE_EN = "en";
 
 	public static SQLiteDatabase DATABASE;
 	
@@ -41,19 +45,24 @@ public class DatabaseCreator {
 
 	@SuppressLint("DefaultLocale")
 	public static Boolean getSearchData(Integer beginLimit, Integer countLimit, Integer searchVol, String searchString,
-			ArrayList<String> userName, ArrayList<String> userId,
+			ArrayList<String> userName, ArrayList<String> userId, String languagecode,
 			ArrayList<String> userLyric, ArrayList<String> userAuthor) {
 		String productchoice = SettingActivity.itemProductSelected;
+		
+
 		String tableName = " ZSONG inner join Z_PRIMARYKEY on ZSONG.Z_ENT=Z_PRIMARYKEY.Z_ENT ";
 		String select = "ZSNAME,ZROWID,ZSLYRIC,ZSMETA";
-		String WHERE = "Z_NAME = '" + productchoice + "' ";
+		String WHERE = "Z_NAME = '" + productchoice + "'";
+		if (languagecode != null) {
+			WHERE += " AND ZSLANGUAGE = '" + languagecode + "' ";
+		}
 		if (searchVol != null) {
 			WHERE += " AND ZROWID = "+ String.valueOf(searchVol) + " ";
 		} else {
 			String search = SqlCode.encode(searchString.toLowerCase());
 			WHERE += "  AND (ZSNAMECLEAN like '" + search + "%' "
 					+ "or ZSLYRICCLEAN like '" + search + "%' "
-					+ "or ZSABBR like '" + search + "%')";
+					+ "or ZSABBR like '" + search + "%') ";
 		}
 
 		Cursor CURSORSEARCH = SqliteExecutor.queryStatement(DATABASE, tableName, select, WHERE, beginLimit, countLimit);

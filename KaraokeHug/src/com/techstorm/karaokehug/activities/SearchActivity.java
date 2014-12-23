@@ -37,6 +37,9 @@ public class SearchActivity extends Activity implements OnClickListener,
 	private ArrayList<String> userId = new ArrayList<String>();
 	private ArrayList<String> userLyric = new ArrayList<String>();
 	private ArrayList<String> userAuthor = new ArrayList<String>();
+	private static final String ALL = "All";
+	private static final String LANGUAGE_CODE_VN = "vn";
+	private static final String LANGUAGE_CODE_EN = "en";
 
 	int BACKBUTTONCOUNT = 0;
 	private Integer beginLimit = 0;
@@ -98,10 +101,18 @@ public class SearchActivity extends Activity implements OnClickListener,
 	}
 
 	private void displayData(Integer searchId, String searchString) {
-			boolean hasData = DatabaseCreator
+		 String languagecode = null;
+			String choice = SettingActivity.itemSelected;
+
+		 if (choice.contains(this.getString(R.string.vnsong_string))) {
+				languagecode = LANGUAGE_CODE_VN;
+			}
+			if (choice.contains(this.getString(R.string.ensong_string))) {
+				languagecode = LANGUAGE_CODE_EN;
+			}
+		boolean hasData = DatabaseCreator
 				.getSearchData(beginLimit, COUNTLIMIT, searchId, searchString,
-						userName, userId, userLyric, userAuthor);
-			
+						userName, userId, languagecode, userLyric, userAuthor);
 		if (hasData) {
 			disadpt = new DisplaySong(SearchActivity.this, userId, userName,
 					userLyric, userAuthor);
@@ -139,6 +150,10 @@ public class SearchActivity extends Activity implements OnClickListener,
 				this,
 				this.getApplicationContext().getString(R.string.select_model)
 						+ " " + SettingActivity.itemProductSelected,
+				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				this,
+				 SettingActivity.itemSelected,
 				Toast.LENGTH_LONG).show();
 	
 	
