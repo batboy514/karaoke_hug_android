@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">KaraokeHug</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -34,5 +33,6 @@
     <string name="search_by_alphabet">Search by alphabet</string>
     <string name="select_model">You are selecting</string>
     <string name="choose">You are not choose any media player</string>
-
+	<string name="play_karaoke">Play karaoke song</string>
+	<string name="karaoke">Karaoke</string>
 </resources>

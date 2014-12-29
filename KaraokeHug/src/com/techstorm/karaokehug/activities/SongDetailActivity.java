@@ -1,8 +1,10 @@
 package com.techstorm.karaokehug.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,6 +60,15 @@ public class SongDetailActivity extends Activity implements View.OnClickListener
 					DatabaseCreator.addFavourite(song);
 				}
 			}});
+		
+		final Button btnPlay = (Button) findViewById(R.id.btnPlay);
+		btnPlay.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+			    startActivity(new Intent(SongDetailActivity.this, PlayVideoActivity.class));
+		    }
+		}); 
+		
 		Button btn = (Button) findViewById(R.id.btn);
 		btn.setOnClickListener(this);
 	}

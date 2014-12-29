@@ -34,5 +34,6 @@
     <string name="search_by_alphabet">Tìm kiếm theo chữ cái</string>
     <string name="select_model">Bạn đang chọn</string>
     <string name="choose">Bạn chưa chọn loại đầu dĩa</string>
-
+	<string name="play_karaoke">Hát karaoke ngay</string>
+	<string name="karaoke">Karaoke</string>
 </resources>

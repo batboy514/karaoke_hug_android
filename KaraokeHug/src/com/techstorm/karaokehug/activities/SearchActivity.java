@@ -122,7 +122,9 @@ public class SearchActivity extends Activity implements OnClickListener,
 			textCheck.setVisibility(View.GONE);
 		} else {
 			if (userAuthor.isEmpty()) {
-				disadpt.notifyDataSetChanged();
+				if (disadpt != null) {
+					disadpt.notifyDataSetChanged();
+				}
 			
 				listviewSearch.setVisibility(View.GONE);
 				textCheck.setText(this.getApplicationContext().getString(
